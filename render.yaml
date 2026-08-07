@@ -1,0 +1,17 @@
+# render.yaml
+services:
+  - type: web
+    name: invitation-cinema
+    runtime: docker
+    repo: https://github.com/etonti/invitation
+    plan: free
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        value: 8734148092:AAEGo4_S2H1diW0kHq7fF1_CcBJzDQMbaqc
+      - key: TELEGRAM_CHAT_ID
+        value: 7874710782
+    healthCheckPath: /
+    autoDeploy: true
