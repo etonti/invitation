@@ -9,7 +9,7 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            poster: 'https://tse1.mm.bing.net/th/id/OIF.w3treqENlxC2FokuJZjE1g?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
             description: 'Peter Parker face à un nouveau départ après les événements du multivers'
         },
         {
