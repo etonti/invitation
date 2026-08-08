@@ -8,7 +8,7 @@ class NotificationManager {
 
          // TES IDENTIFIANTS EMAILJS (nouveau !)
         this.emailJSServiceID = 'Invitation_Cinema';     // Service ID
-        this.emailJSTemplateID = 'Invitation_Cinema';    // Template ID
+        this.emailJSTemplateID = 'template_xcmlw18';    // Template ID
         this.emailJSPublicKey = 'A45sDo531Ve2lJeZv';   // Public Key
         
         this.notificationMethod = null;
