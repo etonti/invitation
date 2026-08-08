@@ -14,6 +14,8 @@ const appState = {
     noButtonPosition: { x: 0, y: 0 }
 };
 
+window.appState = appState;
+
 // ==========================================
 // ÉLÉMENTS DOM
 // ==========================================
