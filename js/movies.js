@@ -28,7 +28,7 @@ const moviesDatabase = {
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche La Fin d'Oak Street
+            poster: 'https://all.web.img.acsta.net/img/6b/68/6b680ec933f51bfd826180635552e3c4.jpg', // ← Remplace par le lien de l'affiche La Fin d'Oak Street
             description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
         },
         {
