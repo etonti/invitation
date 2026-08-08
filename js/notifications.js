@@ -5,6 +5,11 @@ class NotificationManager {
         // TES IDENTIFIANTS TELEGRAM (pour TOI)
         this.telegramBotToken = '8734148092:AAEGo4_S2H1diW0kHq7fF1_CcBJzDQMbaqc';
         this.telegramChatId = '7874710782';
+
+         // TES IDENTIFIANTS EMAILJS (nouveau !)
+        this.emailJSServiceID = 'Invitation_Cinema';     // Service ID
+        this.emailJSTemplateID = 'Invitation_Cinema';    // Template ID
+        this.emailJSPublicKey = 'A45sDo531Ve2lJeZv';   // Public Key
         
         this.notificationMethod = null;
         this.email = null;
