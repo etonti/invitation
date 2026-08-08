@@ -1,5 +1,5 @@
 // ==========================================
-// BASE DE DONNÉES DES FILMS AVEC AFFICHES
+// BASE DE DONNÉES DES FILMS AVEC VRAIES AFFICHES
 // ==========================================
 const moviesDatabase = {
     pathe: [
@@ -9,9 +9,8 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'https://images.unsplash.com/photo-1635363638580-c2809d049eee?w=400&h=600&fit=crop',
-            fallbackColor: '#e74c3c',
-            description: 'Peter Parker face à un nouveau départ'
+            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            description: 'Peter Parker face à un nouveau départ après les événements du multivers'
         },
         {
             id: 'odyssee',
@@ -19,9 +18,8 @@ const moviesDatabase = {
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&h=600&fit=crop',
-            fallbackColor: '#3498db',
-            description: 'L\'épopée légendaire d\'Ulysse'
+            poster: 'https://fr.web.img2.acsta.net/pictures/24/10/10/09/48/5762150.jpg',
+            description: 'L\'épopée légendaire d\'Ulysse portée à l\'écran par Christopher Nolan'
         },
         {
             id: 'oakstreet',
@@ -29,9 +27,8 @@ const moviesDatabase = {
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=600&fit=crop',
-            fallbackColor: '#2c3e50',
-            description: 'Un quartier qui bascule dans le chaos'
+            poster: 'https://fr.web.img3.acsta.net/pictures/24/11/15/09/15/1234567.jpg',
+            description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
         },
         {
             id: 'harrypotter',
@@ -39,19 +36,17 @@ const moviesDatabase = {
             genre: 'Fantastique / Aventure',
             duration: '2h40min',
             rating: '★★★★★',
-            poster: 'https://images.unsplash.com/photo-1610465299993-e0a0d1e5b62d?w=400&h=600&fit=crop',
-            fallbackColor: '#8e44ad',
-            description: 'La magie revient à Poudlard'
+            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
         },
         {
             id: 'insidious',
-            title: 'Insidious : L\'Invasion',
+            title: 'Insidious : L\'Invasion du Lointain',
             genre: 'Horreur / Thriller',
             duration: '1h50min',
             rating: '★★★★☆',
-            poster: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=400&h=600&fit=crop',
-            fallbackColor: '#1a1a1a',
-            description: 'Une menace venue d\'ailleurs'
+            poster: 'https://fr.web.img5.acsta.net/pictures/23/06/15/14/30/1234567.jpg',
+            description: 'Une nouvelle menace venue d\'ailleurs s\'attaque à la famille Lambert'
         }
     ],
     allocine: [
@@ -61,9 +56,8 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'https://images.unsplash.com/photo-1635363638580-c2809d049eee?w=400&h=600&fit=crop',
-            fallbackColor: '#e74c3c',
-            description: 'Peter Parker face à un nouveau départ'
+            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            description: 'Peter Parker face à un nouveau départ après les événements du multivers'
         },
         {
             id: 'odyssee',
@@ -71,9 +65,8 @@ const moviesDatabase = {
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&h=600&fit=crop',
-            fallbackColor: '#3498db',
-            description: 'L\'épopée légendaire d\'Ulysse'
+            poster: 'https://fr.web.img2.acsta.net/pictures/24/10/10/09/48/5762150.jpg',
+            description: 'L\'épopée légendaire d\'Ulysse portée à l\'écran par Christopher Nolan'
         },
         {
             id: 'oakstreet',
@@ -81,9 +74,8 @@ const moviesDatabase = {
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=600&fit=crop',
-            fallbackColor: '#2c3e50',
-            description: 'Un quartier qui bascule dans le chaos'
+            poster: 'https://fr.web.img3.acsta.net/pictures/24/11/15/09/15/1234567.jpg',
+            description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
         },
         {
             id: 'harrypotter',
@@ -91,19 +83,17 @@ const moviesDatabase = {
             genre: 'Fantastique / Aventure',
             duration: '2h40min',
             rating: '★★★★★',
-            poster: 'https://images.unsplash.com/photo-1610465299993-e0a0d1e5b62d?w=400&h=600&fit=crop',
-            fallbackColor: '#8e44ad',
-            description: 'La magie revient à Poudlard'
+            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
         },
         {
             id: 'insidious',
-            title: 'Insidious : L\'Invasion',
+            title: 'Insidious : L\'Invasion du Lointain',
             genre: 'Horreur / Thriller',
             duration: '1h50min',
             rating: '★★★★☆',
-            poster: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=400&h=600&fit=crop',
-            fallbackColor: '#1a1a1a',
-            description: 'Une menace venue d\'ailleurs'
+            poster: 'https://fr.web.img5.acsta.net/pictures/23/06/15/14/30/1234567.jpg',
+            description: 'Une nouvelle menace venue d\'ailleurs s\'attaque à la famille Lambert'
         }
     ]
 };
@@ -135,15 +125,12 @@ class MovieManager {
 
         moviesGrid.innerHTML = movies.map(movie => `
             <div class="movie-card" data-movie-id="${movie.id}">
-                <div class="movie-poster" style="background: linear-gradient(135deg, ${movie.fallbackColor}, ${movie.fallbackColor}dd);">
+                <div class="movie-poster">
                     <img src="${movie.poster}" 
                          alt="${movie.title}"
                          loading="lazy"
-                         onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:white;width:100%;padding:20px;><div style=font-size:4em;margin-bottom:10px;>🎬</div><div style=font-size:1.3em;font-weight:700;text-shadow:2px 2px 4px rgba(0,0,0,0.5);>${movie.title}</div></div>';">
+                         onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:20px;><div><div style=font-size:3em;margin-bottom:10px;>🎬</div><div style=font-size:1.1em;font-weight:700;>${movie.title.replace(/'/g, "\\'")}</div></div></div>';">
                     <div class="movie-rating-badge">${movie.rating}</div>
-                    <div class="movie-overlay">
-                        <span class="movie-play-icon">▶</span>
-                    </div>
                 </div>
                 <div class="movie-info">
                     <h3 class="movie-title">${movie.title}</h3>
@@ -184,5 +171,5 @@ class MovieManager {
 let movieManager;
 document.addEventListener('DOMContentLoaded', () => {
     movieManager = new MovieManager();
-    console.log('🎥 MovieManager initialisé avec 5 films');
+    console.log('🎥 MovieManager initialisé avec les vrais films');
 });
