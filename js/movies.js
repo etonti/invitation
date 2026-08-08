@@ -10,7 +10,7 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Spider-Man
+            poster: 'https://boutique-spiderman.fr/cdn/shop/articles/Spidermlan_brand_new_day_trailer_2_c80367fd-68ff-44a2-bc67-f33cee516672.jpg?v=1785379747&width=1920', // ← Remplace par le lien de l'affiche Spider-Man
             description: 'Peter Parker face à un nouveau départ après les événements du multivers'
         },
         {
