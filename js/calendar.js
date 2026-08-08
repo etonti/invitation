@@ -138,6 +138,9 @@ class CalendarManager {
     selectDate(date) {
         this.selectedDate = date;
         
+        // Sauvegarder dans l'état global
+        appState.invitation.date = date;
+        
         // Mettre à jour l'affichage visuel
         document.querySelectorAll('.day.selected').forEach(el => {
             el.classList.remove('selected');
@@ -180,6 +183,9 @@ class CalendarManager {
             timePicker.addEventListener('change', (e) => {
                 this.selectedTime = e.target.value;
                 
+                // Sauvegarder dans l'état global
+                appState.invitation.time = this.selectedTime;
+                
                 if (this.selectedDate && this.selectedTime) {
                     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                     const formattedDate = this.selectedDate.toLocaleDateString('fr-FR', options);
@@ -193,24 +199,8 @@ class CalendarManager {
             });
         }
 
-        const btnNextDate = document.getElementById('btnNextDate');
-        if (btnNextDate) {
-            btnNextDate.addEventListener('click', () => {
-                if (!this.selectedDate) {
-                    showToast('📅 Choisis une date d\'abord !', 'error');
-                    return;
-                }
-                if (!this.selectedTime) {
-                    showToast('⏰ N\'oublie pas l\'heure !', 'error');
-                    return;
-                }
-                
-                appState.invitation.date = this.selectedDate;
-                appState.invitation.time = this.selectedTime;
-                updateFinalMessage();
-                StepManager.showStep(6);
-            });
-        }
+        // Le bouton est géré dans script.js maintenant
+        this.checkCanProceed();
     }
 
     checkCanProceed() {
@@ -239,33 +229,49 @@ document.addEventListener('DOMContentLoaded', () => {
     window.calendarManager = calendarManager;
 });
 
+// Fonction globale pour mettre à jour le récapitulatif final
 function updateFinalMessage() {
-    if (!calendarManager) return;
+    if (!calendarManager) {
+        console.error('❌ CalendarManager non initialisé');
+        return;
+    }
     
-const cinemaNames = {
-    'pathe': 'Pathé 🎭',
-    'allocine': 'Allociné 🍿'
-};
+    const cinemaNames = {
+        'pathe': 'Pathé 🎭',
+        'allocine': 'Allociné 🍿'
+    };
     
     const lieuNames = {
-        'chez-moi': 'Chez moi 🏡', 'chez-toi': 'Chez toi 🏠', 'chacun': 'Chacun chez soi 👋'
+        'chez-moi': 'Chez moi 🏡', 
+        'chez-toi': 'Chez toi 🏠', 
+        'chacun': 'Chacun chez soi 👋'
     };
     
     const foodEmojis = {
-        'popcorn': '🍿 Popcorn', 'nachos': '🧀 Nachos', 'bonbons': '🍬 Bonbons',
-        'chocolat': '🍫 Chocolat', 'boisson': '🥤 Boisson', 'glace': '🍦 Glace'
+        'popcorn': '🍿 Popcorn', 
+        'nachos': '🧀 Nachos', 
+        'bonbons': '🍬 Bonbons',
+        'chocolat': '🍫 Chocolat', 
+        'boisson': '🥤 Boisson', 
+        'glace': '🍦 Glace'
     };
     
-    const nourritureListe = appState.invitation.nourriture.map(f => foodEmojis[f] || f).join('<br>');
+    const nourritureListe = (appState.invitation.nourriture || [])
+        .map(f => foodEmojis[f] || f)
+        .join('<br>');
+    
     const dateTime = calendarManager.getFormattedDateTime();
+    const movieTitle = appState.invitation.movie?.title || 'Non défini';
     
     const finalMessageElement = document.getElementById('finalMessage');
     if (finalMessageElement) {
         finalMessageElement.innerHTML = `
             <p><strong>🎬 Cinéma :</strong> ${cinemaNames[appState.invitation.cinema] || 'Non défini'}</p>
+            <p><strong>🎥 Film :</strong> ${movieTitle}</p>
             <p><strong>🍿 À grignoter :</strong><br>${nourritureListe || 'Non défini'}</p>
             <p><strong>📍 Après la séance :</strong> ${lieuNames[appState.invitation.lieu] || 'Non défini'}</p>
             <p><strong>📅 Date et heure :</strong> ${dateTime}</p>
         `;
+        console.log('✅ Message final mis à jour avec le film:', movieTitle);
     }
 }
