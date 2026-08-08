@@ -1,5 +1,5 @@
 // ==========================================
-// BASE DE DONNÉES DES FILMS AVEC AFFICHES RÉELLES
+// BASE DE DONNÉES DES FILMS AVEC AFFICHES
 // ==========================================
 const moviesDatabase = {
     pathe: [
@@ -9,8 +9,9 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'https://image.tmdb.org/t/p/w500/4NU5pGMI8RUYG8SLKYZoL3LJmZH.jpg',
-            description: 'Peter Parker face à un nouveau départ après les événements du multivers'
+            poster: 'https://images.unsplash.com/photo-1635363638580-c2809d049eee?w=400&h=600&fit=crop',
+            fallbackColor: '#e74c3c',
+            description: 'Peter Parker face à un nouveau départ'
         },
         {
             id: 'odyssee',
@@ -18,8 +19,9 @@ const moviesDatabase = {
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'https://image.tmdb.org/t/p/w500/8ZgXwVxP0VX4Tq0KZqXwP0KZqXwP.jpg',
-            description: 'L\'épopée légendaire d\'Ulysse portée à l\'écran'
+            poster: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&h=600&fit=crop',
+            fallbackColor: '#3498db',
+            description: 'L\'épopée légendaire d\'Ulysse'
         },
         {
             id: 'oakstreet',
@@ -27,8 +29,9 @@ const moviesDatabase = {
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'https://image.tmdb.org/t/p/w500/qJ2tW6WMkP0VX4Tq0KZqXwP0KZqX.jpg',
-            description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
+            poster: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=600&fit=crop',
+            fallbackColor: '#2c3e50',
+            description: 'Un quartier qui bascule dans le chaos'
         },
         {
             id: 'harrypotter',
@@ -36,17 +39,19 @@ const moviesDatabase = {
             genre: 'Fantastique / Aventure',
             duration: '2h40min',
             rating: '★★★★★',
-            poster: 'https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg',
-            description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
+            poster: 'https://images.unsplash.com/photo-1610465299993-e0a0d1e5b62d?w=400&h=600&fit=crop',
+            fallbackColor: '#8e44ad',
+            description: 'La magie revient à Poudlard'
         },
         {
             id: 'insidious',
-            title: 'Insidious : L\'Invasion du Lointain',
+            title: 'Insidious : L\'Invasion',
             genre: 'Horreur / Thriller',
             duration: '1h50min',
             rating: '★★★★☆',
-            poster: 'https://image.tmdb.org/t/p/w500/4NU5pGMI8RUYG8SLKYZoL3LJmZH.jpg',
-            description: 'Une nouvelle menace venue d\'ailleurs s\'attaque à la famille Lambert'
+            poster: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=400&h=600&fit=crop',
+            fallbackColor: '#1a1a1a',
+            description: 'Une menace venue d\'ailleurs'
         }
     ],
     allocine: [
@@ -56,8 +61,9 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'https://image.tmdb.org/t/p/w500/4NU5pGMI8RUYG8SLKYZoL3LJmZH.jpg',
-            description: 'Peter Parker face à un nouveau départ après les événements du multivers'
+            poster: 'https://images.unsplash.com/photo-1635363638580-c2809d049eee?w=400&h=600&fit=crop',
+            fallbackColor: '#e74c3c',
+            description: 'Peter Parker face à un nouveau départ'
         },
         {
             id: 'odyssee',
@@ -65,8 +71,9 @@ const moviesDatabase = {
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'https://image.tmdb.org/t/p/w500/8ZgXwVxP0VX4Tq0KZqXwP0KZqXwP.jpg',
-            description: 'L\'épopée légendaire d\'Ulysse portée à l\'écran'
+            poster: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=400&h=600&fit=crop',
+            fallbackColor: '#3498db',
+            description: 'L\'épopée légendaire d\'Ulysse'
         },
         {
             id: 'oakstreet',
@@ -74,8 +81,9 @@ const moviesDatabase = {
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'https://image.tmdb.org/t/p/w500/qJ2tW6WMkP0VX4Tq0KZqXwP0KZqX.jpg',
-            description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
+            poster: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=600&fit=crop',
+            fallbackColor: '#2c3e50',
+            description: 'Un quartier qui bascule dans le chaos'
         },
         {
             id: 'harrypotter',
@@ -83,17 +91,19 @@ const moviesDatabase = {
             genre: 'Fantastique / Aventure',
             duration: '2h40min',
             rating: '★★★★★',
-            poster: 'https://image.tmdb.org/t/p/w500/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg',
-            description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
+            poster: 'https://images.unsplash.com/photo-1610465299993-e0a0d1e5b62d?w=400&h=600&fit=crop',
+            fallbackColor: '#8e44ad',
+            description: 'La magie revient à Poudlard'
         },
         {
             id: 'insidious',
-            title: 'Insidious : L\'Invasion du Lointain',
+            title: 'Insidious : L\'Invasion',
             genre: 'Horreur / Thriller',
             duration: '1h50min',
             rating: '★★★★☆',
-            poster: 'https://image.tmdb.org/t/p/w500/4NU5pGMI8RUYG8SLKYZoL3LJmZH.jpg',
-            description: 'Une nouvelle menace venue d\'ailleurs s\'attaque à la famille Lambert'
+            poster: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=400&h=600&fit=crop',
+            fallbackColor: '#1a1a1a',
+            description: 'Une menace venue d\'ailleurs'
         }
     ]
 };
@@ -119,22 +129,25 @@ class MovieManager {
         const movies = moviesDatabase[cinema] || [];
         
         if (movies.length === 0) {
-            moviesGrid.innerHTML = '<p style="text-align:center;color:#636e72;">Aucun film disponible pour ce cinéma.</p>';
+            moviesGrid.innerHTML = '<p style="text-align:center;color:#636e72;padding:40px;">Aucun film disponible pour ce cinéma.</p>';
             return;
         }
 
         moviesGrid.innerHTML = movies.map(movie => `
             <div class="movie-card" data-movie-id="${movie.id}">
-                <div class="movie-poster">
+                <div class="movie-poster" style="background: linear-gradient(135deg, ${movie.fallbackColor}, ${movie.fallbackColor}dd);">
                     <img src="${movie.poster}" 
                          alt="${movie.title}"
                          loading="lazy"
-                         onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #667eea, #764ba2)'; this.parentElement.innerHTML += '<div style=position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:white;><div style=font-size:3em;>🎬</div><div style=font-size:1.2em;font-weight:700;>${movie.title}</div></div>';">
+                         onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:white;width:100%;padding:20px;><div style=font-size:4em;margin-bottom:10px;>🎬</div><div style=font-size:1.3em;font-weight:700;text-shadow:2px 2px 4px rgba(0,0,0,0.5);>${movie.title}</div></div>';">
                     <div class="movie-rating-badge">${movie.rating}</div>
+                    <div class="movie-overlay">
+                        <span class="movie-play-icon">▶</span>
+                    </div>
                 </div>
                 <div class="movie-info">
                     <h3 class="movie-title">${movie.title}</h3>
-                    <p class="movie-genre">${movie.genre}</p>
+                    <p class="movie-genre"><i class="fas fa-tag"></i> ${movie.genre}</p>
                     <p class="movie-duration"><i class="fas fa-clock"></i> ${movie.duration}</p>
                 </div>
             </div>
