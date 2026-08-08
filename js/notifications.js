@@ -350,10 +350,10 @@ On se retrouve là-bas ! J'ai trop hâte ! 🥳💕
     }
 
     prepareFormData() {
-        const cinemaNames = {
-            'pathe': 'Pathé 🎭',  
-            'Allocine': 'Allociné 🏛️', 
-        };
+const cinemaNames = {
+    'pathe': 'Pathé 🎭',
+    'allocine': 'Allociné 🍿'
+};
         
         const lieuNames = {
             'chez-moi': 'Chez moi 🏡', 
