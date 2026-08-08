@@ -351,10 +351,8 @@ On se retrouve là-bas ! J'ai trop hâte ! 🥳💕
 
     prepareFormData() {
         const cinemaNames = {
-            'pathe': 'Pathé 🎭', 
-            'ugc': 'UGC 🎪', 
-            'gaumont': 'Gaumont 🏛️', 
-            'mk2': 'MK2 🎯'
+            'pathe': 'Pathé 🎭',  
+            'Allocine': 'Allociné 🏛️', 
         };
         
         const lieuNames = {
