@@ -236,6 +236,7 @@ class CalendarManager {
 let calendarManager;
 document.addEventListener('DOMContentLoaded', () => {
     calendarManager = new CalendarManager();
+    window.calendarManager = calendarManager;
 });
 
 function updateFinalMessage() {
