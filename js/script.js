@@ -228,7 +228,7 @@ class SelectionManager {
     }
 
     getCinemaName(cinema) {
-        const names = { 'pathe': 'Pathé', 'ugc': 'UGC', 'gaumont': 'Gaumont', 'mk2': 'MK2' };
+        const names = { 'pathe': 'Pathé', 'Allociné': 'Allociné' };
         return names[cinema] || cinema;
     }
 
