@@ -242,9 +242,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateFinalMessage() {
     if (!calendarManager) return;
     
-    const cinemaNames = {
-        'pathe': 'Pathé 🎭', 'Allocine': 'Allociné 🏛️'
-    };
+const cinemaNames = {
+    'pathe': 'Pathé 🎭',
+    'allocine': 'Allociné 🍿'
+};
     
     const lieuNames = {
         'chez-moi': 'Chez moi 🏡', 'chez-toi': 'Chez toi 🏠', 'chacun': 'Chacun chez soi 👋'
