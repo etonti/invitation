@@ -35,7 +35,7 @@ const allMovies = [
         genre: 'Fantastique / Aventure',
         duration: '2h40min',
         rating: '★★★★★',
-        poster: 'TON_LIEN_HARRYPOTTER',
+        poster: 'https://tse2.mm.bing.net/th/id/OIP.D2v43T3Girm5A322kg7tKAHaEd?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
         description: 'La magie revient à Poudlard'
     },
     {
