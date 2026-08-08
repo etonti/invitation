@@ -1,19 +1,19 @@
-// notifications.js - Version complète avec EmailJS
+// notifications.js - Version complète avec EmailJS + Film
 
 class NotificationManager {
     constructor() {
         // ==========================================
-        // 🔑 TES IDENTIFIANTS - À REMPLACER
+        // 🔑 TES IDENTIFIANTS
         // ==========================================
         
         // Telegram (pour TOI)
         this.telegramBotToken = '8734148092:AAEGo4_S2H1diW0kHq7fF1_CcBJzDQMbaqc';
         this.telegramChatId = '7874710782';
         
-        // EmailJS (pour la PERSONNE) - Crée un compte sur emailjs.com
-        this.emailJSServiceID = 'Invitation_Cinema';    // Service ID
-        this.emailJSTemplateID = 'template_xcmlw18';  // Template ID
-        this.emailJSPublicKey = 'A45sDo531Ve2lJeZv'; // Public Key
+        // EmailJS (pour la PERSONNE)
+        this.emailJSServiceID = 'Invitation_Cinema';
+        this.emailJSTemplateID = 'template_xcmlw18';
+        this.emailJSPublicKey = 'A45sDo531Ve2lJeZv';
         
         this.notificationMethod = null;
         this.email = null;
@@ -183,6 +183,7 @@ class NotificationManager {
 
 ━━━━━━━━━━━━━━━━━━━━
 📽️ <b>Cinéma :</b> ${formData.cinema}
+🎥 <b>Film :</b> ${formData.movie}
 🍿 <b>Snacks :</b> ${formData.nourriture}
 📍 <b>Après :</b> ${formData.lieu}
 📅 <b>Date :</b> ${formData.date}
@@ -223,6 +224,7 @@ class NotificationManager {
                     template_params: {
                         to_email: formData.email,
                         cinema: formData.cinema,
+                        movie: formData.movie,
                         nourriture: formData.nourriture,
                         lieu: formData.lieu,
                         date: formData.date
@@ -235,11 +237,9 @@ class NotificationManager {
             } else {
                 const errorData = await response.text();
                 console.error('❌ Erreur EmailJS:', errorData);
-                throw new Error('EmailJS: ' + errorData);
             }
         } catch (error) {
             console.error('❌ Échec envoi email:', error);
-            // On ne bloque pas tout si l'email échoue
         }
     }
 
@@ -247,9 +247,8 @@ class NotificationManager {
     async sendSMSConfirmation(formData) {
         console.log('📱 SMS à:', formData.phone);
         
-        const message = `🎬 Cinéma confirmé ! ${formData.cinema} - ${formData.date}. À bientôt ! ✨`;
+        const message = `🎬 Cinéma: ${formData.cinema} | 🎥 ${formData.movie} | 📅 ${formData.date}. À bientôt ! ✨`;
         
-        // Option 1 : Via Telegram si le numéro est sur Telegram
         try {
             const response = await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
                 method: 'POST',
@@ -264,7 +263,6 @@ class NotificationManager {
                 console.log('✅ Message envoyé via Telegram');
             }
         } catch (e) {
-            // Le numéro n'est probablement pas sur Telegram
             console.log('📱 SMS (à implémenter avec Twilio ou autre service)');
         }
     }
@@ -286,8 +284,11 @@ class NotificationManager {
             dateTime = window.calendarManager.getFormattedDateTime();
         }
 
+        const movieTitle = window.appState?.invitation?.movie?.title || 'Non défini';
+
         return {
             cinema: cinemaNames[window.appState?.invitation?.cinema] || 'Non défini',
+            movie: movieTitle,
             nourriture: window.appState?.invitation?.nourriture?.join(', ') || 'Non défini',
             lieu: lieuNames[window.appState?.invitation?.lieu] || 'Non défini',
             date: dateTime,
