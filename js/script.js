@@ -5,6 +5,7 @@ const appState = {
     currentStep: 1,
     invitation: {
         cinema: null,
+        movie: null,
         nourriture: [],
         lieu: null,
         date: null,
@@ -26,8 +27,10 @@ const DOM = {
     btnNo: document.getElementById('btnNo'),
     btnYes: document.getElementById('btnYes'),
     btnNextCinema: document.getElementById('btnNextCinema'),
+    btnNextMovie: document.getElementById('btnNextMovie'),
     btnNextFood: document.getElementById('btnNextFood'),
     btnNextLieu: document.getElementById('btnNextLieu'),
+    btnNextDate: document.getElementById('btnNextDate'),
     buttonsContainer: document.getElementById('buttonsContainer'),
     messageRefus: document.getElementById('messageRefus'),
     compteurTentatives: document.getElementById('compteurTentatives'),
@@ -140,7 +143,7 @@ class StepManager {
 
     static nextStep() {
         const nextStep = appState.currentStep + 1;
-        if (nextStep <= 6) {
+        if (nextStep <= 7) {
             this.showStep(nextStep);
         }
     }
@@ -155,18 +158,32 @@ class SelectionManager {
         this.selectedFoods = new Set();
         this.selectedLieu = null;
         this.setupCinemaSelection();
+        this.setupMovieButton();
         this.setupFoodSelection();
         this.setupLieuSelection();
     }
 
     setupCinemaSelection() {
         const cinemaCards = document.querySelectorAll('.cinema-card');
+        
         cinemaCards.forEach(card => {
             card.addEventListener('click', () => {
                 cinemaCards.forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
-                this.selectedCinema = card.dataset.cinema;
+                
+                const cinemaValue = card.dataset.cinema;
+                console.log('🎬 Cinéma sélectionné:', cinemaValue);
+                
+                this.selectedCinema = cinemaValue;
+                appState.invitation.cinema = cinemaValue;
+                
+                // Charger les films du cinéma sélectionné
+                if (typeof movieManager !== 'undefined' && movieManager) {
+                    movieManager.loadMovies(cinemaValue);
+                }
+                
                 DOM.btnNextCinema.disabled = false;
+                
                 if (navigator.vibrate) navigator.vibrate(20);
                 showToast(`${this.getCinemaName(this.selectedCinema)} sélectionné ! 🎬`, 'success');
             });
@@ -174,10 +191,21 @@ class SelectionManager {
 
         DOM.btnNextCinema.addEventListener('click', () => {
             if (this.selectedCinema) {
-                appState.invitation.cinema = this.selectedCinema;
-                StepManager.nextStep();
+                console.log('✅ Passage à l\'étape films, cinéma:', appState.invitation.cinema);
+                StepManager.showStep(3);
             }
         });
+    }
+
+    setupMovieButton() {
+        if (DOM.btnNextMovie) {
+            DOM.btnNextMovie.addEventListener('click', () => {
+                if (appState.invitation.movie) {
+                    console.log('✅ Film sélectionné:', appState.invitation.movie.title);
+                    StepManager.showStep(4);
+                }
+            });
+        }
     }
 
     setupFoodSelection() {
@@ -192,6 +220,7 @@ class SelectionManager {
                     item.classList.add('selected');
                     this.selectedFoods.add(food);
                 }
+                appState.invitation.nourriture = Array.from(this.selectedFoods);
                 DOM.foodCount.textContent = this.selectedFoods.size;
                 DOM.btnNextFood.disabled = this.selectedFoods.size === 0;
                 if (navigator.vibrate) navigator.vibrate(20);
@@ -200,8 +229,8 @@ class SelectionManager {
 
         DOM.btnNextFood.addEventListener('click', () => {
             if (this.selectedFoods.size > 0) {
-                appState.invitation.nourriture = Array.from(this.selectedFoods);
-                StepManager.nextStep();
+                console.log('✅ Passage à l\'étape lieu');
+                StepManager.showStep(5);
             }
         });
     }
@@ -213,6 +242,7 @@ class SelectionManager {
                 lieuCards.forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
                 this.selectedLieu = card.dataset.lieu;
+                appState.invitation.lieu = this.selectedLieu;
                 DOM.btnNextLieu.disabled = false;
                 if (navigator.vibrate) navigator.vibrate(20);
                 showToast(`${this.getLieuName(this.selectedLieu)} choisi ! 🏠`, 'success');
@@ -221,16 +251,16 @@ class SelectionManager {
 
         DOM.btnNextLieu.addEventListener('click', () => {
             if (this.selectedLieu) {
-                appState.invitation.lieu = this.selectedLieu;
-                StepManager.nextStep();
+                console.log('✅ Passage à l\'étape calendrier');
+                StepManager.showStep(6);
             }
         });
     }
 
-getCinemaName(cinema) {
-    const names = { 'pathe': 'Pathé', 'allocine': 'Allociné' };
-    return names[cinema] || cinema;
-}
+    getCinemaName(cinema) {
+        const names = { 'pathe': 'Pathé', 'allocine': 'Allociné' };
+        return names[cinema] || cinema;
+    }
 
     getLieuName(lieu) {
         const names = { 'chez-moi': 'Chez moi', 'chez-toi': 'Chez toi', 'chacun': 'Chacun chez soi' };
@@ -268,10 +298,23 @@ DOM.btnYes.addEventListener('click', () => {
 // INITIALISATION
 // ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    const noButton = new NoButtonManager();
-    const selections = new SelectionManager();
+    new NoButtonManager();
+    new SelectionManager();
+    
+    // Écouteur pour le bouton date (étape 6 → étape 7)
+    const btnNextDate = document.getElementById('btnNextDate');
+    if (btnNextDate) {
+        btnNextDate.addEventListener('click', () => {
+            if (appState.invitation.date && appState.invitation.time) {
+                updateFinalMessage();
+                StepManager.showStep(7);
+            }
+        });
+    }
+    
     setTimeout(() => {
         showToast('Bienvenue ! Prêt pour une soirée inoubliable ? 🎬✨', 'info');
     }, 1000);
     console.log('🚀 Application d\'invitation cinéma initialisée !');
+    console.log('📋 Étapes: 1-Oui/Non 2-Cinéma 3-Film 4-Snacks 5-Lieu 6-Date 7-Confirmation');
 });
