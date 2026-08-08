@@ -18,7 +18,7 @@ const moviesDatabase = {
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'https://fr.web.img2.acsta.net/pictures/24/10/10/09/48/5762150.jpg',
+            poster: 'https://www.themoviedb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg',
             description: 'L\'épopée légendaire d\'Ulysse portée à l\'écran par Christopher Nolan'
         },
         {
@@ -27,7 +27,7 @@ const moviesDatabase = {
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'https://fr.web.img3.acsta.net/pictures/24/11/15/09/15/1234567.jpg',
+            poster: 'https://www.themoviedb.org/t/p/w500/qJ2tW6WMkP0VX4Tq0KZqXwP0KZqX.jpg',
             description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
         },
         {
