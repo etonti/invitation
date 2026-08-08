@@ -243,7 +243,7 @@ function updateFinalMessage() {
     if (!calendarManager) return;
     
     const cinemaNames = {
-        'pathe': 'Pathé 🎭', 'Allociné': 'Allociné 🏛️'
+        'pathe': 'Pathé 🎭', 'Allocine': 'Allociné 🏛️'
     };
     
     const lieuNames = {
