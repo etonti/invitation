@@ -1,102 +1,58 @@
 // ==========================================
-// BASE DE DONNÉES DES FILMS AVEC AFFICHES
-// Remplace chaque "TON_LIEN_ICI" par le vrai lien de l'affiche
+// BASE DE DONNÉES DES FILMS
 // ==========================================
+const allMovies = [
+    {
+        id: 'spiderman',
+        title: 'Spider-Man : Brand New Day',
+        genre: 'Action / Super-héros',
+        duration: '2h20min',
+        rating: '★★★★★',
+        poster: 'https://photos.infolocale.fr/infolocale/openagenda/2026/08/28/9606124/_1_cover_290-200_.jpg?rnd=20260804054214',
+        description: 'Peter Parker face à un nouveau départ'
+    },
+    {
+        id: 'odyssee',
+        title: "L'Odyssée",
+        genre: 'Aventure / Drame',
+        duration: '2h35min',
+        rating: '★★★★☆',
+        poster: 'https://images.ladepeche.fr/api/v1/images/view/6a607f77ec4760f16b073e20/large/image.jpg?v=3',
+        description: "L'épopée légendaire d'Ulysse"
+    },
+    {
+        id: 'oakstreet',
+        title: "La Fin d'Oak Street",
+        genre: 'Thriller / Drame',
+        duration: '1h55min',
+        rating: '★★★★☆',
+        poster: 'https://all.web.img.acsta.net/img/6b/68/6b680ec933f51bfd826180635552e3c4.jpg',
+        description: 'Un quartier qui bascule dans le chaos'
+    },
+    {
+        id: 'harrypotter',
+        title: 'Harry Potter : Le Retour',
+        genre: 'Fantastique / Aventure',
+        duration: '2h40min',
+        rating: '★★★★★',
+        poster: 'TON_LIEN_HARRYPOTTER',
+        description: 'La magie revient à Poudlard'
+    },
+    {
+        id: 'insidious',
+        title: "Insidious : L'Invasion du Lointain",
+        genre: 'Horreur / Thriller',
+        duration: '1h50min',
+        rating: '★★★★☆',
+        poster: 'TON_LIEN_INSIDIOUS',
+        description: "Une menace venue d'ailleurs"
+    }
+];
+
+// Les deux cinémas partagent les mêmes films
 const moviesDatabase = {
-    pathe: [
-        {
-            id: 'spiderman',
-            title: 'Spider-Man : Brand New Day',
-            genre: 'Action / Super-héros',
-            duration: '2h20min',
-            rating: '★★★★★',
-            poster: 'https://photos.infolocale.fr/infolocale/openagenda/2026/08/28/9606124/_1_cover_290-200_.jpg?rnd=20260804054214', // ← Remplace par le lien de l'affiche Spider-Man
-            description: 'Peter Parker face à un nouveau départ après les événements du multivers'
-        },
-        {
-            id: 'odyssee',
-            title: "L'Odyssée",
-            genre: 'Aventure / Drame',
-            duration: '2h35min',
-            rating: '★★★★☆',
-            poster: 'https://images.ladepeche.fr/api/v1/images/view/6a607f77ec4760f16b073e20/large/image.jpg?v=3', // ← Remplace par le lien de l'affiche L\'Odyssée
-            description: "L'épopée légendaire d'Ulysse portée à l'écran par Christopher Nolan"
-        },
-        {
-            id: 'oakstreet',
-            title: "La Fin d'Oak Street",
-            genre: 'Thriller / Drame',
-            duration: '1h55min',
-            rating: '★★★★☆',
-            poster: 'https://all.web.img.acsta.net/img/6b/68/6b680ec933f51bfd826180635552e3c4.jpg', // ← Remplace par le lien de l'affiche La Fin d'Oak Street
-            description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
-        },
-        {
-            id: 'harrypotter',
-            title: 'Harry Potter : Le Retour',
-            genre: 'Fantastique / Aventure',
-            duration: '2h40min',
-            rating: '★★★★★',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Harry Potter
-            description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
-        },
-        {
-            id: 'insidious',
-            title: "Insidious : L'Invasion du Lointain",
-            genre: 'Horreur / Thriller',
-            duration: '1h50min',
-            rating: '★★★★☆',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Insidious
-            description: "Une nouvelle menace venue d'ailleurs s'attaque à la famille Lambert"
-        }
-    ],
-    allocine: [
-        {
-            id: 'spiderman',
-            title: 'Spider-Man : Brand New Day',
-            genre: 'Action / Super-héros',
-            duration: '2h20min',
-            rating: '★★★★★',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Spider-Man
-            description: 'Peter Parker face à un nouveau départ après les événements du multivers'
-        },
-        {
-            id: 'odyssee',
-            title: "L'Odyssée",
-            genre: 'Aventure / Drame',
-            duration: '2h35min',
-            rating: '★★★★☆',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche L\'Odyssée
-            description: "L'épopée légendaire d'Ulysse portée à l'écran par Christopher Nolan"
-        },
-        {
-            id: 'oakstreet',
-            title: "La Fin d'Oak Street",
-            genre: 'Thriller / Drame',
-            duration: '1h55min',
-            rating: '★★★★☆',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche La Fin d'Oak Street
-            description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
-        },
-        {
-            id: 'harrypotter',
-            title: 'Harry Potter : Le Retour',
-            genre: 'Fantastique / Aventure',
-            duration: '2h40min',
-            rating: '★★★★★',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Harry Potter
-            description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
-        },
-        {
-            id: 'insidious',
-            title: "Insidious : L'Invasion du Lointain",
-            genre: 'Horreur / Thriller',
-            duration: '1h50min',
-            rating: '★★★★☆',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Insidious
-            description: "Une nouvelle menace venue d'ailleurs s'attaque à la famille Lambert"
-        }
-    ]
+    pathe: allMovies,
+    allocine: allMovies
 };
 
 // ==========================================
@@ -126,11 +82,11 @@ class MovieManager {
 
         moviesGrid.innerHTML = movies.map(movie => `
             <div class="movie-card" data-movie-id="${movie.id}">
-                <div class="movie-poster">
+                <div class="movie-poster" style="background: linear-gradient(135deg, #667eea, #764ba2);">
                     <img src="${movie.poster}" 
                          alt="${movie.title}"
                          loading="lazy"
-                         onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22><rect fill=%22%23667eea%22 width=%22400%22 height=%22600%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2280%22>🎬</text><text x=%22200%22 y=%22320%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2220%22 font-family=%22Arial%22>${movie.title.replace(/'/g, '&apos;')}</text></svg>';">
+                         onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:20px;><div><div style=font-size:3em;>🎬</div><div style=font-size:1.1em;font-weight:700;>${movie.title}</div></div></div>';">
                     <div class="movie-rating-badge">${movie.rating}</div>
                 </div>
                 <div class="movie-info">
@@ -172,5 +128,5 @@ class MovieManager {
 let movieManager;
 document.addEventListener('DOMContentLoaded', () => {
     movieManager = new MovieManager();
-    console.log('🎥 MovieManager initialisé - En attente des liens d\'images');
+    console.log('🎥 MovieManager initialisé');
 });
