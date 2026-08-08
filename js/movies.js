@@ -19,7 +19,7 @@ const moviesDatabase = {
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche L\'Odyssée
+            poster: 'https://images.ladepeche.fr/api/v1/images/view/6a607f77ec4760f16b073e20/large/image.jpg?v=3', // ← Remplace par le lien de l'affiche L\'Odyssée
             description: "L'épopée légendaire d'Ulysse portée à l'écran par Christopher Nolan"
         },
         {
