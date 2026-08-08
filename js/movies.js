@@ -44,7 +44,7 @@ const allMovies = [
         genre: 'Horreur / Thriller',
         duration: '1h50min',
         rating: '★★★★☆',
-        poster: 'TON_LIEN_INSIDIOUS',
+        poster: 'https://tse2.mm.bing.net/th/id/OIP.B5g7Z729gJ4RLA30XjwSTwHaJQ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
         description: "Une menace venue d'ailleurs"
     }
 ];
