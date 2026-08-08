@@ -4,20 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soirée Cinéma 💝 - Invitation Spéciale</title>
-    
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Flatpickr Calendar -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
-    <!-- Animation de fond -->
     <div class="background-animation">
         <div class="floating-element">🎬</div>
         <div class="floating-element">🍿</div>
@@ -27,67 +18,40 @@
         <div class="floating-element">🎭</div>
     </div>
 
-    <!-- Conteneur principal -->
     <main class="main-container">
         <div class="card-container">
             <!-- Barre de progression -->
             <div class="progress-bar">
-                <div class="progress-step active" data-step="1">
-                    <i class="fas fa-question"></i>
-                </div>
+                <div class="progress-step active" data-step="1"><i class="fas fa-question"></i></div>
                 <div class="progress-line" data-line="1"></div>
-                <div class="progress-step" data-step="2">
-                    <i class="fas fa-film"></i>
-                </div>
+                <div class="progress-step" data-step="2"><i class="fas fa-film"></i></div>
                 <div class="progress-line" data-line="2"></div>
-                <div class="progress-step" data-step="3">
-                    <i class="fas fa-utensils"></i>
-                </div>
+                <div class="progress-step" data-step="3"><i class="fas fa-ticket-alt"></i></div>
                 <div class="progress-line" data-line="3"></div>
-                <div class="progress-step" data-step="4">
-                    <i class="fas fa-home"></i>
-                </div>
+                <div class="progress-step" data-step="4"><i class="fas fa-utensils"></i></div>
                 <div class="progress-line" data-line="4"></div>
-                <div class="progress-step" data-step="5">
-                    <i class="fas fa-calendar"></i>
-                </div>
+                <div class="progress-step" data-step="5"><i class="fas fa-home"></i></div>
                 <div class="progress-line" data-line="5"></div>
-                <div class="progress-step" data-step="6">
-                    <i class="fas fa-paper-plane"></i>
-                </div>
+                <div class="progress-step" data-step="6"><i class="fas fa-calendar"></i></div>
+                <div class="progress-line" data-line="6"></div>
+                <div class="progress-step" data-step="7"><i class="fas fa-paper-plane"></i></div>
             </div>
 
             <!-- Étape 1: Question Oui/Non -->
             <div class="step active" id="step1">
                 <div class="step-content">
                     <div class="heart-animation">💖</div>
-                    <h1 class="title-animation">Invitation Spéciale</h1>
+                    <h1>Invitation Spéciale</h1>
                     <div class="message-box">
-                        <p class="question-text">
-                            Salut ! Ça te dit de passer une super soirée cinéma ensemble ? 🎬✨
-                        </p>
-                        <p class="subtitle-text">
-                            Un bon film, des snacks, et une soirée mémorable !
-                        </p>
+                        <p class="question-text">Salut ! Ça te dit de passer une super soirée cinéma ensemble ? 🎬✨</p>
+                        <p class="subtitle-text">Un bon film, des snacks, et une soirée mémorable !</p>
                     </div>
-                    
                     <div class="buttons-container" id="buttonsContainer">
-                        <button class="btn btn-yes pulse-animation" id="btnYes">
-                            <i class="fas fa-heart"></i> Oui, avec plaisir !
-                        </button>
-                        <button class="btn btn-no" id="btnNo">
-                            <i class="fas fa-times"></i> Non merci...
-                        </button>
+                        <button class="btn btn-yes pulse-animation" id="btnYes"><i class="fas fa-heart"></i> Oui, avec plaisir !</button>
+                        <button class="btn btn-no" id="btnNo"><i class="fas fa-times"></i> Non merci...</button>
                     </div>
-                    
-                    <div class="message-refus" id="messageRefus">
-                        <i class="fas fa-smile-wink"></i> 
-                        Ça sert à rien de refuser, tu sais que tu veux dire OUI ! 😏💕
-                    </div>
-                    
-                    <div class="compteur-tentatives" id="compteurTentatives" style="display: none;">
-                        Tentatives de refus : <span id="nbTentatives">0</span> 🤭
-                    </div>
+                    <div class="message-refus" id="messageRefus"><i class="fas fa-smile-wink"></i> Ça sert à rien de refuser, tu sais que tu veux dire OUI ! 😏💕</div>
+                    <div class="compteur-tentatives" id="compteurTentatives" style="display: none;">Tentatives de refus : <span id="nbTentatives">0</span> 🤭</div>
                 </div>
             </div>
 
@@ -97,7 +61,6 @@
                     <div class="icon-animation">🎬</div>
                     <h1>Quel cinéma préfères-tu ?</h1>
                     <p class="question-subtitle">Sélectionne ton cinéma favori :</p>
-                    
                     <div class="cinema-grid">
                         <div class="cinema-card" data-cinema="pathe">
                             <div class="cinema-icon">🎭</div>
@@ -105,29 +68,34 @@
                             <div class="cinema-description">L'expérience premium</div>
                             <div class="cinema-stars">★★★★★</div>
                         </div>
-                        
                         <div class="cinema-card" data-cinema="allocine">
-                            <div class="cinema-icon">🏛️</div>
+                            <div class="cinema-icon">🍿</div>
                             <div class="cinema-name">Allociné</div>
                             <div class="cinema-description">Le cinéma pour tous</div>
-                            <div class="cinema-stars">★★★★★</div>
+                            <div class="cinema-stars">★★★★☆</div>
                         </div>
-                        
                     </div>
-                    
-                    <button class="btn btn-next" id="btnNextCinema" disabled>
-                        Continuer <i class="fas fa-arrow-right"></i>
-                    </button>
+                    <button class="btn btn-next" id="btnNextCinema" disabled>Continuer <i class="fas fa-arrow-right"></i></button>
                 </div>
             </div>
 
-            <!-- Étape 3: Préférences alimentaires -->
+            <!-- Étape 3: Choix du film AVEC AFFICHES -->
             <div class="step" id="step3">
+                <div class="step-content">
+                    <div class="icon-animation">🎥</div>
+                    <h1>Quel film veux-tu voir ?</h1>
+                    <p class="question-subtitle">Choisis le film qui te fait envie :</p>
+                    <div class="movies-grid" id="moviesGrid"></div>
+                    <button class="btn btn-next" id="btnNextMovie" disabled>Continuer <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Étape 4: Préférences alimentaires -->
+            <div class="step" id="step4">
                 <div class="step-content">
                     <div class="icon-animation">🍿</div>
                     <h1>Qu'est-ce qu'on grignote ?</h1>
                     <p class="question-subtitle">Choisis tout ce qui te fait envie :</p>
-                    
                     <div class="food-grid" id="foodGrid">
                         <div class="food-item" data-food="popcorn">
                             <div class="food-emoji">🍿</div>
@@ -135,35 +103,30 @@
                             <div class="food-type">Classique beurre</div>
                             <div class="check-icon"><i class="fas fa-check-circle"></i></div>
                         </div>
-                        
                         <div class="food-item" data-food="nachos">
                             <div class="food-emoji">🧀</div>
                             <div class="food-name">Nachos</div>
                             <div class="food-type">Sauce fromagère</div>
                             <div class="check-icon"><i class="fas fa-check-circle"></i></div>
                         </div>
-                        
                         <div class="food-item" data-food="bonbons">
                             <div class="food-emoji">🍬</div>
                             <div class="food-name">Bonbons</div>
                             <div class="food-type">Mix de friandises</div>
                             <div class="check-icon"><i class="fas fa-check-circle"></i></div>
                         </div>
-                        
                         <div class="food-item" data-food="chocolat">
                             <div class="food-emoji">🍫</div>
                             <div class="food-name">Chocolat</div>
                             <div class="food-type">Tablette ou M&M's</div>
                             <div class="check-icon"><i class="fas fa-check-circle"></i></div>
                         </div>
-                        
                         <div class="food-item" data-food="boisson">
                             <div class="food-emoji">🥤</div>
                             <div class="food-name">Boisson</div>
                             <div class="food-type">Soda ou Ice Tea</div>
                             <div class="check-icon"><i class="fas fa-check-circle"></i></div>
                         </div>
-                        
                         <div class="food-item" data-food="glace">
                             <div class="food-emoji">🍦</div>
                             <div class="food-name">Glace</div>
@@ -171,213 +134,129 @@
                             <div class="check-icon"><i class="fas fa-check-circle"></i></div>
                         </div>
                     </div>
-                    
-                    <div class="selected-count">
-                        <span id="foodCount">0</span> snack(s) sélectionné(s)
-                    </div>
-                    
-                    <button class="btn btn-next" id="btnNextFood" disabled>
-                        Valider <i class="fas fa-check"></i>
-                    </button>
+                    <div class="selected-count"><span id="foodCount">0</span> snack(s) sélectionné(s)</div>
+                    <button class="btn btn-next" id="btnNextFood" disabled>Valider <i class="fas fa-check"></i></button>
                 </div>
             </div>
 
-            <!-- Étape 4: Après le cinéma -->
-            <div class="step" id="step4">
+            <!-- Étape 5: Après le cinéma -->
+            <div class="step" id="step5">
                 <div class="step-content">
                     <div class="icon-animation">🏠</div>
                     <h1>Et après la séance ?</h1>
                     <p class="question-subtitle">On fait quoi après le film ?</p>
-                    
                     <div class="lieu-grid">
                         <div class="lieu-card" data-lieu="chez-moi">
                             <div class="lieu-icon">🏡</div>
                             <div class="lieu-name">Chez moi</div>
-                            <div class="lieu-description">
-                                <i class="fas fa-tv"></i> Netflix & Chill<br>
-                                <i class="fas fa-pizza-slice"></i> On commande à manger<br>
-                                <i class="fas fa-gamepad"></i> Jeux vidéo
-                            </div>
+                            <div class="lieu-description"><i class="fas fa-tv"></i> Netflix & Chill<br><i class="fas fa-pizza-slice"></i> On commande à manger<br><i class="fas fa-gamepad"></i> Jeux vidéo</div>
                         </div>
-                        
                         <div class="lieu-card" data-lieu="chez-toi">
                             <div class="lieu-icon">🏠</div>
                             <div class="lieu-name">Chez toi</div>
-                            <div class="lieu-description">
-                                <i class="fas fa-music"></i> Ambiance musicale<br>
-                                <i class="fas fa-couch"></i> Détente assurée<br>
-                                <i class="fas fa-star"></i> Comme tu veux
-                            </div>
+                            <div class="lieu-description"><i class="fas fa-music"></i> Ambiance musicale<br><i class="fas fa-couch"></i> Détente assurée<br><i class="fas fa-star"></i> Comme tu veux</div>
                         </div>
-                        
                         <div class="lieu-card" data-lieu="chacun">
                             <div class="lieu-icon">👋</div>
                             <div class="lieu-name">Chacun chez soi</div>
-                            <div class="lieu-description">
-                                <i class="fas fa-bed"></i> Dodo mérité<br>
-                                <i class="fas fa-phone"></i> On s'appelle demain<br>
-                                <i class="fas fa-heart"></i> Bonne nuit !
-                            </div>
+                            <div class="lieu-description"><i class="fas fa-bed"></i> Dodo mérité<br><i class="fas fa-phone"></i> On s'appelle demain<br><i class="fas fa-heart"></i> Bonne nuit !</div>
                         </div>
                     </div>
-                    
-                    <button class="btn btn-next" id="btnNextLieu" disabled>
-                        Choisir la date <i class="fas fa-calendar"></i>
-                    </button>
+                    <button class="btn btn-next" id="btnNextLieu" disabled>Choisir la date <i class="fas fa-calendar"></i></button>
                 </div>
             </div>
 
-            <!-- Étape 5: Calendrier -->
-            <div class="step" id="step5">
+            <!-- Étape 6: Calendrier -->
+            <div class="step" id="step6">
                 <div class="step-content">
                     <div class="icon-animation">📅</div>
                     <h1>Quand es-tu disponible ?</h1>
                     <p class="question-subtitle">Choisis la date et l'heure qui te conviennent :</p>
-                    
                     <div class="calendar-container">
-                        <div class="calendar-header">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>Sélectionne une date</span>
-                        </div>
-                        
+                        <div class="calendar-header"><i class="fas fa-calendar-alt"></i><span>Sélectionne une date</span></div>
                         <div id="calendar"></div>
-                        
                         <div class="time-selection">
-                            <label for="timePicker">
-                                <i class="fas fa-clock"></i> Heure de la séance :
-                            </label>
+                            <label for="timePicker"><i class="fas fa-clock"></i> Heure de la séance :</label>
                             <select id="timePicker" class="time-picker">
                                 <option value="">Choisis une heure</option>
-                                <option value="14:00">14:00</option>
-                                <option value="14:30">14:30</option>
-                                <option value="15:00">15:00</option>
-                                <option value="15:30">15:30</option>
-                                <option value="16:00">16:00</option>
-                                <option value="16:30">16:30</option>
-                                <option value="17:00">17:00</option>
-                                <option value="17:30">17:30</option>
-                                <option value="18:00">18:00</option>
-                                <option value="18:30">18:30</option>
-                                <option value="19:00">19:00</option>
-                                <option value="19:30">19:30</option>
-                                <option value="20:00">20:00</option>
-                                <option value="20:30">20:30</option>
-                                <option value="21:00">21:00</option>
-                                <option value="21:30">21:30</option>
+                                <option value="14:00">14:00</option><option value="14:30">14:30</option>
+                                <option value="15:00">15:00</option><option value="15:30">15:30</option>
+                                <option value="16:00">16:00</option><option value="16:30">16:30</option>
+                                <option value="17:00">17:00</option><option value="17:30">17:30</option>
+                                <option value="18:00">18:00</option><option value="18:30">18:30</option>
+                                <option value="19:00">19:00</option><option value="19:30">19:30</option>
+                                <option value="20:00">20:00</option><option value="20:30">20:30</option>
+                                <option value="21:00">21:00</option><option value="21:30">21:30</option>
                                 <option value="22:00">22:00</option>
                             </select>
                         </div>
-                        
                         <div class="selected-date-display" id="selectedDateDisplay" style="display: none;">
-                            <i class="fas fa-check-circle"></i>
-                            Date sélectionnée : <span id="selectedDateText"></span>
+                            <i class="fas fa-check-circle"></i> Date sélectionnée : <span id="selectedDateText"></span>
                         </div>
                     </div>
-                    
-                    <button class="btn btn-next" id="btnNextDate" disabled>
-                        Envoyer ma réponse <i class="fas fa-paper-plane"></i>
-                    </button>
+                    <button class="btn btn-next" id="btnNextDate" disabled>Envoyer ma réponse <i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
 
-            <!-- Étape 6: Confirmation et envoi -->
-            <div class="step" id="step6">
+            <!-- Étape 7: Confirmation -->
+            <div class="step" id="step7">
                 <div class="step-content">
                     <div class="confirmation-animation">
                         <div class="confetti-container">
-                            <span class="confetti">🎉</span>
-                            <span class="confetti">✨</span>
-                            <span class="confetti">🎊</span>
-                            <span class="confetti">💖</span>
-                            <span class="confetti">🌟</span>
+                            <span class="confetti">🎉</span><span class="confetti">✨</span><span class="confetti">🎊</span><span class="confetti">💖</span><span class="confetti">🌟</span>
                         </div>
                     </div>
-                    
                     <h1 class="success-title">Parfait ! 🎉</h1>
-                    
                     <div class="recap-card">
                         <h3><i class="fas fa-clipboard-list"></i> Récapitulatif de la soirée</h3>
                         <div id="finalMessage" class="recap-content"></div>
                     </div>
-                    
                     <div class="notification-section">
                         <h3><i class="fas fa-bell"></i> Comment veux-tu être notifié(e) ?</h3>
-                        
                         <div class="notification-options">
                             <div class="notification-card" data-method="email">
-                                <div class="notification-icon">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
+                                <div class="notification-icon"><i class="fas fa-envelope"></i></div>
                                 <div class="notification-name">Par Email</div>
                                 <div class="notification-desc">Reçois un récapitulatif détaillé</div>
                             </div>
-                            
                             <div class="notification-card" data-method="sms">
-                                <div class="notification-icon">
-                                    <i class="fas fa-sms"></i>
-                                </div>
+                                <div class="notification-icon"><i class="fas fa-sms"></i></div>
                                 <div class="notification-name">Par SMS</div>
                                 <div class="notification-desc">Reçois un résumé par texto</div>
                             </div>
-                            
                             <div class="notification-card" data-method="both">
-                                <div class="notification-icon">
-                                    <i class="fas fa-bell"></i>
-                                </div>
+                                <div class="notification-icon"><i class="fas fa-bell"></i></div>
                                 <div class="notification-name">Les deux</div>
                                 <div class="notification-desc">Email + SMS pour être sûr</div>
                             </div>
                         </div>
-                        
                         <div class="contact-form" id="contactForm" style="display: none;">
                             <div class="form-group" id="emailGroup" style="display: none;">
-                                <label for="emailInput">
-                                    <i class="fas fa-envelope"></i> Ton adresse email :
-                                </label>
-                                <input type="email" id="emailInput" class="form-input" 
-                                       placeholder="exemple@email.com">
+                                <label for="emailInput"><i class="fas fa-envelope"></i> Ton adresse email :</label>
+                                <input type="email" id="emailInput" class="form-input" placeholder="exemple@email.com">
                             </div>
-                            
                             <div class="form-group" id="phoneGroup" style="display: none;">
-                                <label for="phoneInput">
-                                    <i class="fas fa-phone"></i> Ton numéro de téléphone :
-                                </label>
-                                <input type="tel" id="phoneInput" class="form-input" 
-                                       placeholder="+33 6 12 34 56 78">
+                                <label for="phoneInput"><i class="fas fa-phone"></i> Ton numéro de téléphone :</label>
+                                <input type="tel" id="phoneInput" class="form-input" placeholder="+33 6 12 34 56 78">
                             </div>
                         </div>
-                        
-                        <button class="btn btn-send" id="btnSendNotification" style="display: none;">
-                            <i class="fas fa-paper-plane"></i> Envoyer la confirmation
-                        </button>
+                        <button class="btn btn-send" id="btnSendNotification" style="display: none;"><i class="fas fa-paper-plane"></i> Envoyer la confirmation</button>
                     </div>
-                    
                     <div class="loading-spinner" id="loadingSpinner" style="display: none;">
-                        <div class="spinner"></div>
-                        <p>Envoi en cours...</p>
+                        <div class="spinner"></div><p>Envoi en cours...</p>
                     </div>
-                    
                     <div class="success-message" id="successMessage" style="display: none;">
-                        <i class="fas fa-check-circle"></i>
-                        <h3>Réponse envoyée avec succès !</h3>
-                        <p>J'ai hâte de te voir ! 🥳💕</p>
+                        <i class="fas fa-check-circle"></i><h3>Réponse envoyée avec succès !</h3><p>J'ai hâte de te voir ! 🥳💕</p>
                     </div>
-                    
                     <div class="heart-final">💝</div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Notification toast -->
-    <div class="toast" id="toast">
-        <i class="fas fa-info-circle"></i>
-        <span class="toast-message"></span>
-    </div>
+    <div class="toast" id="toast"><i class="fas fa-info-circle"></i><span class="toast-message"></span></div>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script src="js/movies.js"></script>
     <script src="js/calendar.js"></script>
     <script src="js/notifications.js"></script>
     <script src="js/script.js"></script>
