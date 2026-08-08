@@ -243,7 +243,7 @@ function updateFinalMessage() {
     if (!calendarManager) return;
     
     const cinemaNames = {
-        'pathe': 'Pathé 🎭', 'ugc': 'UGC 🎪', 'gaumont': 'Gaumont 🏛️', 'mk2': 'MK2 🎯'
+        'pathe': 'Pathé 🎭', 'Allociné': 'Allociné 🏛️'
     };
     
     const lieuNames = {
