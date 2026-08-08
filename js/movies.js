@@ -1,5 +1,6 @@
 // ==========================================
-// BASE DE DONNÉES DES FILMS AVEC VRAIES AFFICHES
+// BASE DE DONNÉES DES FILMS AVEC AFFICHES
+// Remplace chaque "TON_LIEN_ICI" par le vrai lien de l'affiche
 // ==========================================
 const moviesDatabase = {
     pathe: [
@@ -9,25 +10,25 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'https://www.themoviedb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Spider-Man
             description: 'Peter Parker face à un nouveau départ après les événements du multivers'
         },
         {
             id: 'odyssee',
-            title: 'L\'Odyssée',
+            title: "L'Odyssée",
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'https://www.themoviedb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg',
-            description: 'L\'épopée légendaire d\'Ulysse portée à l\'écran par Christopher Nolan'
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche L\'Odyssée
+            description: "L'épopée légendaire d'Ulysse portée à l'écran par Christopher Nolan"
         },
         {
             id: 'oakstreet',
-            title: 'La Fin d\'Oak Street',
+            title: "La Fin d'Oak Street",
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'https://www.themoviedb.org/t/p/w500/qJ2tW6WMkP0VX4Tq0KZqXwP0KZqX.jpg',
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche La Fin d'Oak Street
             description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
         },
         {
@@ -36,17 +37,17 @@ const moviesDatabase = {
             genre: 'Fantastique / Aventure',
             duration: '2h40min',
             rating: '★★★★★',
-            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Harry Potter
             description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
         },
         {
             id: 'insidious',
-            title: 'Insidious : L\'Invasion du Lointain',
+            title: "Insidious : L'Invasion du Lointain",
             genre: 'Horreur / Thriller',
             duration: '1h50min',
             rating: '★★★★☆',
-            poster: 'https://fr.web.img5.acsta.net/pictures/23/06/15/14/30/1234567.jpg',
-            description: 'Une nouvelle menace venue d\'ailleurs s\'attaque à la famille Lambert'
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Insidious
+            description: "Une nouvelle menace venue d'ailleurs s'attaque à la famille Lambert"
         }
     ],
     allocine: [
@@ -56,25 +57,25 @@ const moviesDatabase = {
             genre: 'Action / Super-héros',
             duration: '2h20min',
             rating: '★★★★★',
-            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Spider-Man
             description: 'Peter Parker face à un nouveau départ après les événements du multivers'
         },
         {
             id: 'odyssee',
-            title: 'L\'Odyssée',
+            title: "L'Odyssée",
             genre: 'Aventure / Drame',
             duration: '2h35min',
             rating: '★★★★☆',
-            poster: 'https://fr.web.img2.acsta.net/pictures/24/10/10/09/48/5762150.jpg',
-            description: 'L\'épopée légendaire d\'Ulysse portée à l\'écran par Christopher Nolan'
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche L\'Odyssée
+            description: "L'épopée légendaire d'Ulysse portée à l'écran par Christopher Nolan"
         },
         {
             id: 'oakstreet',
-            title: 'La Fin d\'Oak Street',
+            title: "La Fin d'Oak Street",
             genre: 'Thriller / Drame',
             duration: '1h55min',
             rating: '★★★★☆',
-            poster: 'https://fr.web.img3.acsta.net/pictures/24/11/15/09/15/1234567.jpg',
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche La Fin d'Oak Street
             description: 'Un quartier paisible bascule dans le chaos après une disparition mystérieuse'
         },
         {
@@ -83,17 +84,17 @@ const moviesDatabase = {
             genre: 'Fantastique / Aventure',
             duration: '2h40min',
             rating: '★★★★★',
-            poster: 'https://fr.web.img6.acsta.net/pictures/21/12/14/09/10/5305926.jpg',
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Harry Potter
             description: 'La magie revient dans une nouvelle aventure du monde des sorciers'
         },
         {
             id: 'insidious',
-            title: 'Insidious : L\'Invasion du Lointain',
+            title: "Insidious : L'Invasion du Lointain",
             genre: 'Horreur / Thriller',
             duration: '1h50min',
             rating: '★★★★☆',
-            poster: 'https://fr.web.img5.acsta.net/pictures/23/06/15/14/30/1234567.jpg',
-            description: 'Une nouvelle menace venue d\'ailleurs s\'attaque à la famille Lambert'
+            poster: 'TON_LIEN_ICI', // ← Remplace par le lien de l'affiche Insidious
+            description: "Une nouvelle menace venue d'ailleurs s'attaque à la famille Lambert"
         }
     ]
 };
@@ -129,7 +130,7 @@ class MovieManager {
                     <img src="${movie.poster}" 
                          alt="${movie.title}"
                          loading="lazy"
-                         onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:20px;><div><div style=font-size:3em;margin-bottom:10px;>🎬</div><div style=font-size:1.1em;font-weight:700;>${movie.title.replace(/'/g, "\\'")}</div></div></div>';">
+                         onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22600%22><rect fill=%22%23667eea%22 width=%22400%22 height=%22600%22/><text x=%22200%22 y=%22260%22 text-anchor=%22middle%22 font-size=%2280%22>🎬</text><text x=%22200%22 y=%22320%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2220%22 font-family=%22Arial%22>${movie.title.replace(/'/g, '&apos;')}</text></svg>';">
                     <div class="movie-rating-badge">${movie.rating}</div>
                 </div>
                 <div class="movie-info">
@@ -171,5 +172,5 @@ class MovieManager {
 let movieManager;
 document.addEventListener('DOMContentLoaded', () => {
     movieManager = new MovieManager();
-    console.log('🎥 MovieManager initialisé avec les vrais films');
+    console.log('🎥 MovieManager initialisé - En attente des liens d\'images');
 });
