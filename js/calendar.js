@@ -1,5 +1,5 @@
 // ==========================================
-// GESTIONNAIRE DE CALENDRIER - CORRIGÉ
+// GESTIONNAIRE DE CALENDRIER - VERSION DEBUG
 // ==========================================
 class CalendarManager {
     constructor() {
@@ -13,7 +13,7 @@ class CalendarManager {
 
     init() {
         this.renderCalendar();
-        console.log('✅ Calendrier initialisé - Mois:', this.currentMonth + 1, 'Année:', this.currentYear);
+        console.log('✅ Calendrier initialisé');
     }
 
     renderCalendar() {
@@ -27,22 +27,28 @@ class CalendarManager {
 
         const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
         
-        // CORRECTION : Calcul correct du premier jour
-        // getDay() : 0=Dimanche, 1=Lundi, 2=Mardi, 3=Mercredi, 4=Jeudi, 5=Vendredi, 6=Samedi
-        // On veut : 0=Lundi, 1=Mardi, 2=Mercredi, 3=Jeudi, 4=Vendredi, 5=Samedi, 6=Dimanche
-        const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1);
-        let startDay = firstDayOfMonth.getDay() - 1;
-        if (startDay === -1) startDay = 6; // Dimanche devient la dernière colonne
+        // 1er jour du mois
+        const firstDay = new Date(this.currentYear, this.currentMonth, 1);
+        
+        // CORRECTION : getDay() retourne 0 pour Dimanche, 1 pour Lundi...
+        // Notre calendrier commence le Lundi (colonne 0)
+        // Si Dimanche (0) → colonne 6
+        // Si Lundi (1) → colonne 0
+        // Si Mardi (2) → colonne 1
+        // ...
+        // Si Samedi (6) → colonne 5
+        let startCol = firstDay.getDay() - 1;
+        if (startCol < 0) startCol = 6; // Dimanche
         
         const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
         
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        console.log('📅 Premier jour:', firstDayOfMonth.toLocaleDateString('fr-FR'), 
-                    '| getDay():', firstDayOfMonth.getDay(), 
-                    '| Colonne:', startDay, 
-                    '| Jours:', daysInMonth);
+        console.log('📅 MOIS:', months[this.currentMonth], this.currentYear);
+        console.log('   Premier jour:', firstDay.toLocaleDateString('fr-FR', {weekday: 'long'}));
+        console.log('   getDay():', firstDay.getDay(), '→ colonne:', startCol);
+        console.log('   Jours dans le mois:', daysInMonth);
 
         let html = `
             <div class="custom-calendar">
@@ -58,266 +64,162 @@ class CalendarManager {
                         <i class="fas fa-chevron-right"></i>
                     </button>
                 </div>
-                
                 <div class="calendar-grid">
                     <div class="days-header">
-                        ${daysOfWeek.map(day => `<div class="day-name">${day}</div>`).join('')}
+                        ${daysOfWeek.map(d => `<div class="day-name">${d}</div>`).join('')}
                     </div>
-                    <div class="days-body">
-        `;
+                    <div class="days-body">`;
 
-        // Cases vides avant le premier jour
-        for (let i = 0; i < startDay; i++) {
+        // Cases vides
+        for (let i = 0; i < startCol; i++) {
             html += '<div class="day empty"></div>';
         }
 
-        // Jours du mois
-        for (let day = 1; day <= daysInMonth; day++) {
-            const date = new Date(this.currentYear, this.currentMonth, day);
+        // Jours
+        for (let d = 1; d <= daysInMonth; d++) {
+            const date = new Date(this.currentYear, this.currentMonth, d);
             date.setHours(0, 0, 0, 0);
             
+            const dayOfWeek = date.getDay(); // 0=Dim, 1=Lun...
             const isToday = date.getTime() === today.getTime();
             const isPast = date < today;
-            const isSelected = this.selectedDate && 
-                date.getTime() === this.selectedDate.getTime();
-            const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+            const isSelected = this.selectedDate && date.getTime() === this.selectedDate.getTime();
             
-            let dayClass = 'day';
-            if (isToday) dayClass += ' today';
-            if (isPast) dayClass += ' past';
-            if (isSelected) dayClass += ' selected';
-            if (isWeekend) dayClass += ' weekend';
+            let cls = 'day';
+            if (isToday) cls += ' today';
+            if (isPast) cls += ' past';
+            if (isSelected) cls += ' selected';
+            if (dayOfWeek === 0 || dayOfWeek === 6) cls += ' weekend';
             
             html += `
-                <div class="${dayClass}" data-day="${day}" data-date="${date.toISOString()}">
-                    <span class="day-number">${day}</span>
+                <div class="${cls}" data-date="${date.toISOString()}">
+                    <span class="day-number">${d}</span>
                     ${isToday ? '<span class="today-badge">Auj.</span>' : ''}
-                    ${isSelected ? '<span class="selected-badge"><i class="fas fa-check"></i></span>' : ''}
-                </div>
-            `;
+                </div>`;
         }
 
         html += `
                     </div>
                 </div>
-            </div>
-        `;
+            </div>`;
 
         calendarEl.innerHTML = html;
-
         this.addDayListeners();
         this.addNavigationListeners();
     }
 
     addDayListeners() {
-        const days = document.querySelectorAll('.day:not(.empty):not(.past)');
-        days.forEach(day => {
-            // Click pour desktop
-            day.addEventListener('click', (e) => {
+        document.querySelectorAll('.day:not(.empty):not(.past)').forEach(day => {
+            const handler = (e) => {
                 e.preventDefault();
-                const dateStr = day.dataset.date;
-                const date = new Date(dateStr);
+                const date = new Date(day.dataset.date);
                 date.setHours(0, 0, 0, 0);
                 this.selectDate(date);
-            });
-            
-            // Touch pour mobile
-            day.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                const dateStr = day.dataset.date;
-                const date = new Date(dateStr);
-                date.setHours(0, 0, 0, 0);
-                this.selectDate(date);
-            });
+            };
+            day.addEventListener('click', handler);
+            day.addEventListener('touchend', handler);
         });
     }
 
     addNavigationListeners() {
-        const prevBtn = document.getElementById('prevMonth');
-        const nextBtn = document.getElementById('nextMonth');
+        document.getElementById('prevMonth')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.currentMonth--;
+            if (this.currentMonth < 0) { this.currentMonth = 11; this.currentYear--; }
+            this.renderCalendar();
+        });
         
-        if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.currentMonth--;
-                if (this.currentMonth < 0) {
-                    this.currentMonth = 11;
-                    this.currentYear--;
-                }
-                this.renderCalendar();
-                console.log('📅 Navigation:', months[this.currentMonth], this.currentYear);
-            });
-        }
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.currentMonth++;
-                if (this.currentMonth > 11) {
-                    this.currentMonth = 0;
-                    this.currentYear++;
-                }
-                this.renderCalendar();
-                console.log('📅 Navigation:', months[this.currentMonth], this.currentYear);
-            });
-        }
+        document.getElementById('nextMonth')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.currentMonth++;
+            if (this.currentMonth > 11) { this.currentMonth = 0; this.currentYear++; }
+            this.renderCalendar();
+        });
     }
 
     selectDate(date) {
         this.selectedDate = date;
-        
-        // Sauvegarder dans l'état global
         appState.invitation.date = date;
         
-        // Mettre à jour l'affichage visuel
-        document.querySelectorAll('.day.selected').forEach(el => {
-            el.classList.remove('selected');
-            const badge = el.querySelector('.selected-badge');
-            if (badge) badge.remove();
-        });
+        document.querySelectorAll('.day.selected').forEach(el => el.classList.remove('selected'));
         
-        const dateISO = date.toISOString();
-        const selectedDay = document.querySelector(`.day[data-date="${dateISO}"]`);
-        if (selectedDay) {
-            selectedDay.classList.add('selected');
-            // Créer le badge proprement
-            const badge = document.createElement('span');
-            badge.className = 'selected-badge';
-            badge.innerHTML = '<i class="fas fa-check"></i>';
-            selectedDay.appendChild(badge);
+        const el = document.querySelector(`.day[data-date="${date.toISOString()}"]`);
+        if (el) {
+            el.classList.add('selected');
         }
         
-        // Formater et afficher la date
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = date.toLocaleDateString('fr-FR', options);
         
-        const displayText = document.getElementById('selectedDateText');
-        const displayContainer = document.getElementById('selectedDateDisplay');
-        
-        if (displayText && displayContainer) {
-            displayText.textContent = this.selectedTime 
-                ? `${formattedDate} à ${this.selectedTime}`
-                : `${formattedDate} (choisis l'heure ⏰)`;
-            displayContainer.style.display = 'flex';
-            displayContainer.style.animation = 'none';
-            displayContainer.offsetHeight;
-            displayContainer.style.animation = 'slideDown 0.5s ease-out';
+        const dt = document.getElementById('selectedDateText');
+        const dc = document.getElementById('selectedDateDisplay');
+        if (dt && dc) {
+            dt.textContent = this.selectedTime ? `${formattedDate} à ${this.selectedTime}` : `${formattedDate} (choisis l'heure ⏰)`;
+            dc.style.display = 'flex';
         }
         
         this.checkCanProceed();
-        
         if (navigator.vibrate) navigator.vibrate(20);
         showToast('✨ Date sélectionnée !', 'success');
-        
-        console.log('📅 Date choisie:', formattedDate);
     }
 
     setupEventListeners() {
-        const timePicker = document.getElementById('timePicker');
-        if (timePicker) {
-            timePicker.addEventListener('change', (e) => {
-                this.selectedTime = e.target.value;
-                
-                // Sauvegarder dans l'état global
-                appState.invitation.time = this.selectedTime;
-                
-                if (this.selectedDate && this.selectedTime) {
-                    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                    const formattedDate = this.selectedDate.toLocaleDateString('fr-FR', options);
-                    const displayText = document.getElementById('selectedDateText');
-                    if (displayText) {
-                        displayText.textContent = `${formattedDate} à ${this.selectedTime}`;
-                    }
-                }
-                
-                this.checkCanProceed();
-            });
-        }
-
+        document.getElementById('timePicker')?.addEventListener('change', (e) => {
+            this.selectedTime = e.target.value;
+            appState.invitation.time = this.selectedTime;
+            
+            if (this.selectedDate && this.selectedTime) {
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = this.selectedDate.toLocaleDateString('fr-FR', options);
+                const dt = document.getElementById('selectedDateText');
+                if (dt) dt.textContent = `${formattedDate} à ${this.selectedTime}`;
+            }
+            this.checkCanProceed();
+        });
         this.checkCanProceed();
     }
 
     checkCanProceed() {
-        const btnNext = document.getElementById('btnNextDate');
-        if (!btnNext) return;
-        
-        if (this.selectedDate && this.selectedTime) {
-            btnNext.disabled = false;
-            btnNext.style.opacity = '1';
-            btnNext.style.cursor = 'pointer';
-            btnNext.style.pointerEvents = 'auto';
-        } else {
-            btnNext.disabled = true;
-            btnNext.style.opacity = '0.5';
-            btnNext.style.cursor = 'not-allowed';
-            btnNext.style.pointerEvents = 'none';
-        }
+        const btn = document.getElementById('btnNextDate');
+        if (!btn) return;
+        const ok = this.selectedDate && this.selectedTime;
+        btn.disabled = !ok;
+        btn.style.opacity = ok ? '1' : '0.5';
+        btn.style.cursor = ok ? 'pointer' : 'not-allowed';
+        btn.style.pointerEvents = ok ? 'auto' : 'none';
     }
 
     getFormattedDateTime() {
         if (!this.selectedDate || !this.selectedTime) return 'Date non définie';
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = this.selectedDate.toLocaleDateString('fr-FR', options);
-        return `${formattedDate} à ${this.selectedTime}`;
+        return `${this.selectedDate.toLocaleDateString('fr-FR', options)} à ${this.selectedTime}`;
     }
 }
 
-// Variables pour la navigation
-const months = [
-    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
-];
-
-// Initialisation
 let calendarManager;
 document.addEventListener('DOMContentLoaded', () => {
     calendarManager = new CalendarManager();
     window.calendarManager = calendarManager;
 });
 
-// Fonction globale pour mettre à jour le récapitulatif final
 function updateFinalMessage() {
-    if (!calendarManager) {
-        console.error('❌ CalendarManager non initialisé');
-        return;
-    }
+    if (!calendarManager) return;
     
-    const cinemaNames = {
-        'pathe': 'Pathé 🎭',
-        'allocine': 'Allociné 🍿'
-    };
+    const cinemaNames = { 'pathe': 'Pathé 🎭', 'allocine': 'Allociné 🍿' };
+    const lieuNames = { 'chez-moi': 'Chez moi 🏡', 'chez-toi': 'Chez toi 🏠', 'chacun': 'Chacun chez soi 👋' };
+    const foodEmojis = { 'popcorn': '🍿 Popcorn', 'nachos': '🧀 Nachos', 'bonbons': '🍬 Bonbons', 'chocolat': '🍫 Chocolat', 'boisson': '🥤 Boisson', 'glace': '🍦 Glace' };
     
-    const lieuNames = {
-        'chez-moi': 'Chez moi 🏡', 
-        'chez-toi': 'Chez toi 🏠', 
-        'chacun': 'Chacun chez soi 👋'
-    };
-    
-    const foodEmojis = {
-        'popcorn': '🍿 Popcorn', 
-        'nachos': '🧀 Nachos', 
-        'bonbons': '🍬 Bonbons',
-        'chocolat': '🍫 Chocolat', 
-        'boisson': '🥤 Boisson', 
-        'glace': '🍦 Glace'
-    };
-    
-    const nourritureListe = (appState.invitation.nourriture || [])
-        .map(f => foodEmojis[f] || f)
-        .join('<br>');
-    
+    const nourritureListe = (appState.invitation.nourriture || []).map(f => foodEmojis[f] || f).join('<br>');
     const dateTime = calendarManager.getFormattedDateTime();
     const movieTitle = appState.invitation.movie?.title || 'Non défini';
     
-    const finalMessageElement = document.getElementById('finalMessage');
-    if (finalMessageElement) {
-        finalMessageElement.innerHTML = `
+    const el = document.getElementById('finalMessage');
+    if (el) {
+        el.innerHTML = `
             <p><strong>🎬 Cinéma :</strong> ${cinemaNames[appState.invitation.cinema] || 'Non défini'}</p>
             <p><strong>🎥 Film :</strong> ${movieTitle}</p>
             <p><strong>🍿 À grignoter :</strong><br>${nourritureListe || 'Non défini'}</p>
             <p><strong>📍 Après la séance :</strong> ${lieuNames[appState.invitation.lieu] || 'Non défini'}</p>
-            <p><strong>📅 Date et heure :</strong> ${dateTime}</p>
-        `;
-        console.log('✅ Message final mis à jour');
+            <p><strong>📅 Date et heure :</strong> ${dateTime}</p>`;
     }
 }
