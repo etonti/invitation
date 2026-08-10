@@ -268,10 +268,10 @@ class NotificationManager {
     }
 
     prepareFormData() {
-        const cinemaNames = {
-            'pathe': 'Pathé 🎭',
-            'allocine': 'Allociné 🍿'
-        };
+       const cinemaNames = {
+    'pathe-orleans': 'Pathé Orléans 🏛️',
+    'pathe-saran': 'Pathé Saran 🏢'
+};
         
         const lieuNames = {
             'chez-moi': 'Chez moi 🏡', 
