@@ -257,10 +257,13 @@ class SelectionManager {
         });
     }
 
-    getCinemaName(cinema) {
-        const names = { 'pathe': 'Pathé', 'allocine': 'Allociné' };
-        return names[cinema] || cinema;
-    }
+getCinemaName(cinema) {
+    const names = { 
+        'pathe-orleans': 'Pathé Orléans', 
+        'pathe-saran': 'Pathé Saran' 
+    };
+    return names[cinema] || cinema;
+}
 
     getLieuName(lieu) {
         const names = { 'chez-moi': 'Chez moi', 'chez-toi': 'Chez toi', 'chacun': 'Chacun chez soi' };
