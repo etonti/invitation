@@ -205,7 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateFinalMessage() {
     if (!calendarManager) return;
     
-    const cinemaNames = { 'pathe': 'Pathé 🎭', 'allocine': 'Allociné 🍿' };
+   const cinemaNames = {
+    'pathe-orleans': 'Pathé Orléans 🏛️',
+    'pathe-saran': 'Pathé Saran 🏢'
+};
     const lieuNames = { 'chez-moi': 'Chez moi 🏡', 'chez-toi': 'Chez toi 🏠', 'chacun': 'Chacun chez soi 👋' };
     const foodEmojis = { 'popcorn': '🍿 Popcorn', 'nachos': '🧀 Nachos', 'bonbons': '🍬 Bonbons', 'chocolat': '🍫 Chocolat', 'boisson': '🥤 Boisson', 'glace': '🍦 Glace' };
     
