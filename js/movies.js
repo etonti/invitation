@@ -49,10 +49,10 @@ const allMovies = [
     }
 ];
 
-// Les deux cinémas partagent les mêmes films
+// ⚠️ CORRECTION : Utilise les vrais noms des cinémas
 const moviesDatabase = {
-    pathe: allMovies,
-    allocine: allMovies
+    'pathe-orleans': allMovies,
+    'pathe-saran': allMovies
 };
 
 // ==========================================
