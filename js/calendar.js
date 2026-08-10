@@ -1,5 +1,5 @@
 // ==========================================
-// GESTIONNAIRE DE CALENDRIER - NOUVEAU DESIGN
+// GESTIONNAIRE DE CALENDRIER - CORRIGÉ
 // ==========================================
 class CalendarManager {
     constructor() {
@@ -13,7 +13,7 @@ class CalendarManager {
 
     init() {
         this.renderCalendar();
-        console.log('✅ Calendrier personnalisé initialisé');
+        console.log('✅ Calendrier initialisé - Mois:', this.currentMonth + 1, 'Année:', this.currentYear);
     }
 
     renderCalendar() {
@@ -27,10 +27,22 @@ class CalendarManager {
 
         const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
         
-        const firstDay = new Date(this.currentYear, this.currentMonth, 1).getDay();
+        // CORRECTION : Calcul correct du premier jour
+        // getDay() : 0=Dimanche, 1=Lundi, 2=Mardi, 3=Mercredi, 4=Jeudi, 5=Vendredi, 6=Samedi
+        // On veut : 0=Lundi, 1=Mardi, 2=Mercredi, 3=Jeudi, 4=Vendredi, 5=Samedi, 6=Dimanche
+        const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1);
+        let startDay = firstDayOfMonth.getDay() - 1;
+        if (startDay === -1) startDay = 6; // Dimanche devient la dernière colonne
+        
         const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
+        
         const today = new Date();
         today.setHours(0, 0, 0, 0);
+
+        console.log('📅 Premier jour:', firstDayOfMonth.toLocaleDateString('fr-FR'), 
+                    '| getDay():', firstDayOfMonth.getDay(), 
+                    '| Colonne:', startDay, 
+                    '| Jours:', daysInMonth);
 
         let html = `
             <div class="custom-calendar">
@@ -55,7 +67,6 @@ class CalendarManager {
         `;
 
         // Cases vides avant le premier jour
-        const startDay = firstDay === 0 ? 6 : firstDay - 1;
         for (let i = 0; i < startDay; i++) {
             html += '<div class="day empty"></div>';
         }
@@ -63,6 +74,8 @@ class CalendarManager {
         // Jours du mois
         for (let day = 1; day <= daysInMonth; day++) {
             const date = new Date(this.currentYear, this.currentMonth, day);
+            date.setHours(0, 0, 0, 0);
+            
             const isToday = date.getTime() === today.getTime();
             const isPast = date < today;
             const isSelected = this.selectedDate && 
@@ -78,7 +91,7 @@ class CalendarManager {
             html += `
                 <div class="${dayClass}" data-day="${day}" data-date="${date.toISOString()}">
                     <span class="day-number">${day}</span>
-                    ${isToday ? '<span class="today-badge">Aujourd\'hui</span>' : ''}
+                    ${isToday ? '<span class="today-badge">Auj.</span>' : ''}
                     ${isSelected ? '<span class="selected-badge"><i class="fas fa-check"></i></span>' : ''}
                 </div>
             `;
@@ -92,7 +105,6 @@ class CalendarManager {
 
         calendarEl.innerHTML = html;
 
-        // Ajouter les écouteurs d'événements
         this.addDayListeners();
         this.addNavigationListeners();
     }
@@ -100,9 +112,21 @@ class CalendarManager {
     addDayListeners() {
         const days = document.querySelectorAll('.day:not(.empty):not(.past)');
         days.forEach(day => {
-            day.addEventListener('click', () => {
+            // Click pour desktop
+            day.addEventListener('click', (e) => {
+                e.preventDefault();
                 const dateStr = day.dataset.date;
                 const date = new Date(dateStr);
+                date.setHours(0, 0, 0, 0);
+                this.selectDate(date);
+            });
+            
+            // Touch pour mobile
+            day.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                const dateStr = day.dataset.date;
+                const date = new Date(dateStr);
+                date.setHours(0, 0, 0, 0);
                 this.selectDate(date);
             });
         });
@@ -113,24 +137,28 @@ class CalendarManager {
         const nextBtn = document.getElementById('nextMonth');
         
         if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
                 this.currentMonth--;
                 if (this.currentMonth < 0) {
                     this.currentMonth = 11;
                     this.currentYear--;
                 }
                 this.renderCalendar();
+                console.log('📅 Navigation:', months[this.currentMonth], this.currentYear);
             });
         }
         
         if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
                 this.currentMonth++;
                 if (this.currentMonth > 11) {
                     this.currentMonth = 0;
                     this.currentYear++;
                 }
                 this.renderCalendar();
+                console.log('📅 Navigation:', months[this.currentMonth], this.currentYear);
             });
         }
     }
@@ -148,10 +176,15 @@ class CalendarManager {
             if (badge) badge.remove();
         });
         
-        const selectedDay = document.querySelector(`.day[data-date="${date.toISOString()}"]`);
+        const dateISO = date.toISOString();
+        const selectedDay = document.querySelector(`.day[data-date="${dateISO}"]`);
         if (selectedDay) {
             selectedDay.classList.add('selected');
-            selectedDay.innerHTML += '<span class="selected-badge"><i class="fas fa-check"></i></span>';
+            // Créer le badge proprement
+            const badge = document.createElement('span');
+            badge.className = 'selected-badge';
+            badge.innerHTML = '<i class="fas fa-check"></i>';
+            selectedDay.appendChild(badge);
         }
         
         // Formater et afficher la date
@@ -174,7 +207,9 @@ class CalendarManager {
         this.checkCanProceed();
         
         if (navigator.vibrate) navigator.vibrate(20);
-        showToast('✨ Date sélectionnée avec succès !', 'success');
+        showToast('✨ Date sélectionnée !', 'success');
+        
+        console.log('📅 Date choisie:', formattedDate);
     }
 
     setupEventListeners() {
@@ -199,7 +234,6 @@ class CalendarManager {
             });
         }
 
-        // Le bouton est géré dans script.js maintenant
         this.checkCanProceed();
     }
 
@@ -209,8 +243,14 @@ class CalendarManager {
         
         if (this.selectedDate && this.selectedTime) {
             btnNext.disabled = false;
+            btnNext.style.opacity = '1';
+            btnNext.style.cursor = 'pointer';
+            btnNext.style.pointerEvents = 'auto';
         } else {
             btnNext.disabled = true;
+            btnNext.style.opacity = '0.5';
+            btnNext.style.cursor = 'not-allowed';
+            btnNext.style.pointerEvents = 'none';
         }
     }
 
@@ -221,6 +261,12 @@ class CalendarManager {
         return `${formattedDate} à ${this.selectedTime}`;
     }
 }
+
+// Variables pour la navigation
+const months = [
+    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
+];
 
 // Initialisation
 let calendarManager;
@@ -272,6 +318,6 @@ function updateFinalMessage() {
             <p><strong>📍 Après la séance :</strong> ${lieuNames[appState.invitation.lieu] || 'Non défini'}</p>
             <p><strong>📅 Date et heure :</strong> ${dateTime}</p>
         `;
-        console.log('✅ Message final mis à jour avec le film:', movieTitle);
+        console.log('✅ Message final mis à jour');
     }
 }
