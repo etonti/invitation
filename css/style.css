@@ -1716,5 +1716,182 @@ h1 {
     .movie-duration {
         font-size: 0.7em;
     }
+
+   /* ==========================================
+   SÉLECTEUR D'HEURE
+   ========================================== */
+.time-selection {
+    margin: 25px 0;
+}
+
+.time-selection label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    font-size: 1.1em;
+    color: #2d3436;
+    margin-bottom: 15px;
+    background: #f8f9ff;
+    padding: 15px 20px;
+    border-radius: 15px;
+}
+
+.time-selection label i {
+    color: #667eea;
+    font-size: 1.3em;
+}
+
+.time-picker {
+    width: 100%;
+    padding: 14px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 15px;
+    font-size: 1.1em;
+    color: #2d3436;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23667eea' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+    font-weight: 600;
+}
+
+.time-picker:hover {
+    border-color: #667eea;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+}
+
+.time-picker:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.time-picker option {
+    padding: 10px;
+    font-weight: 500;
+}
+
+/* ==========================================
+   AFFICHAGE DATE SÉLECTIONNÉE
+   ========================================== */
+.selected-date-display {
+    margin-top: 20px;
+    padding: 18px 25px;
+    background: linear-gradient(135deg, #f0f0ff, #e8eaff);
+    border-radius: 15px;
+    color: #48bb78;
+    font-weight: 600;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid #48bb78;
+}
+
+.selected-date-display i {
+    font-size: 1.4em;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+
+#selectedDateText {
+    color: #764ba2;
+    font-weight: 700;
+    font-size: 1.05em;
+}
+
+/* ==========================================
+   BOUTON VALIDATION DATE
+   ========================================== */
+#btnNextDate {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.2em;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 25px;
+}
+
+#btnNextDate:disabled {
+    background: #e9ecef;
+    color: #b2bec3;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.5;
+}
+
+#btnNextDate:not(:disabled) {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    animation: pulse 2s infinite;
+    opacity: 1;
+}
+
+#btnNextDate:not(:disabled):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+    .time-selection label {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+    
+    .time-picker {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+    
+    .selected-date-display {
+        font-size: 1em;
+        padding: 15px 20px;
+    }
+    
+    #btnNextDate {
+        font-size: 1.1em;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .time-selection label {
+        font-size: 0.9em;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+    
+    .time-picker {
+        font-size: 0.9em;
+        padding: 10px 12px;
+        background-position: right 12px center;
+        background-size: 16px;
+    }
+    
+    .selected-date-display {
+        font-size: 0.9em;
+        padding: 12px 15px;
+        gap: 8px;
+    }
+    
+    #btnNextDate {
+        font-size: 1em;
+        padding: 14px;
+    }
+}
     
 }
