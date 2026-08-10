@@ -55,46 +55,47 @@
                 </div>
             </div>
 
-<!-- Étape 2: Choix du cinéma -->
-<div class="step" id="step2">
-    <div class="step-content">
-        <div class="icon-animation">🎬</div>
-        <h1>Quel cinéma préfères-tu ?</h1>
-        <p class="question-subtitle">Sélectionne ton cinéma :</p>
-        <div class="cinema-grid">
-            <div class="cinema-card" data-cinema="pathe-orleans">
-                <div class="cinema-icon">🏛️</div>
-                <div class="cinema-name">Pathé Orléans</div>
-                <div class="cinema-description">En centre-ville</div>
-                <div class="cinema-stars">★★★★★</div>
+            <!-- Étape 2: Choix du cinéma -->
+            <div class="step" id="step2">
+                <div class="step-content">
+                    <div class="icon-animation">🎬</div>
+                    <h1>Quel cinéma préfères-tu ?</h1>
+                    <p class="question-subtitle">Sélectionne ton cinéma :</p>
+                    <div class="cinema-grid">
+                        <div class="cinema-card" data-cinema="pathe-orleans">
+                            <div class="cinema-icon">🏛️</div>
+                            <div class="cinema-name">Pathé Orléans</div>
+                            <div class="cinema-description">En centre-ville</div>
+                            <div class="cinema-stars">★★★★★</div>
+                        </div>
+                        <div class="cinema-card" data-cinema="pathe-saran">
+                            <div class="cinema-icon">🏢</div>
+                            <div class="cinema-name">Pathé Saran</div>
+                            <div class="cinema-description">Zone commerciale</div>
+                            <div class="cinema-stars">★★★★☆</div>
+                        </div>
+                    </div>
+                    <div class="step-navigation">
+                        <button class="btn btn-back" onclick="StepManager.showStep(1)"><i class="fas fa-arrow-left"></i> Retour</button>
+                        <button class="btn btn-next" id="btnNextCinema" disabled>Continuer <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
             </div>
-            <div class="cinema-card" data-cinema="pathe-saran">
-                <div class="cinema-icon">🏢</div>
-                <div class="cinema-name">Pathé Saran</div>
-                <div class="cinema-description">Zone commerciale</div>
-                <div class="cinema-stars">★★★★☆</div>
-            </div>
-        </div>
-        <div class="step-navigation">
-            <button class="btn btn-back" onclick="StepManager.showStep(1)"><i class="fas fa-arrow-left"></i> Retour</button>
-            <button class="btn btn-next" id="btnNextCinema" disabled>Continuer <i class="fas fa-arrow-right"></i></button>
-        </div>
-    </div>
-</div>
 
-<!-- Étape 3: Choix du film -->
-<div class="step" id="step3">
-    <div class="step-content">
-        <div class="icon-animation">🎥</div>
-        <h1>Quel film veux-tu voir ?</h1>
-        <p class="question-subtitle">Choisis le film qui te fait envie :</p>
-        <div class="movies-grid" id="moviesGrid"></div>
-        <div class="step-navigation">
-            <button class="btn btn-back" onclick="StepManager.showStep(2)"><i class="fas fa-arrow-left"></i> Retour</button>
-            <button class="btn btn-next" id="btnNextMovie" disabled>Continuer <i class="fas fa-arrow-right"></i></button>
-        </div>
-    </div>
-</div>
+            <!-- Étape 3: Choix du film -->
+            <div class="step" id="step3">
+                <div class="step-content">
+                    <div class="icon-animation">🎥</div>
+                    <h1>Quel film veux-tu voir ?</h1>
+                    <p class="question-subtitle">Choisis le film qui te fait envie :</p>
+                    <div class="movies-grid" id="moviesGrid"></div>
+                    <div class="step-navigation">
+                        <button class="btn btn-back" onclick="StepManager.showStep(2)"><i class="fas fa-arrow-left"></i> Retour</button>
+                        <button class="btn btn-next" id="btnNextMovie" disabled>Continuer <i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+
             <!-- Étape 4: Préférences alimentaires -->
             <div class="step" id="step4">
                 <div class="step-content">
@@ -140,13 +141,14 @@
                         </div>
                     </div>
                     <div class="selected-count"><span id="foodCount">0</span> snack(s) sélectionné(s)</div>
-                            <div class="step-navigation">
-            <button class="btn btn-back" onclick="StepManager.showStep(3)"><i class="fas fa-arrow-left"></i> Retour</button>
-                    <button class="btn btn-next" id="btnNextFood" disabled>Valider <i class="fas fa-check"></i></button>
+                    <div class="step-navigation">
+                        <button class="btn btn-back" onclick="StepManager.showStep(3)"><i class="fas fa-arrow-left"></i> Retour</button>
+                        <button class="btn btn-next" id="btnNextFood" disabled>Valider <i class="fas fa-check"></i></button>
+                    </div>
                 </div>
             </div>
 
-<!-- Étape 5: Après le cinéma -->
+            <!-- Étape 5: Après le cinéma -->
             <div class="step" id="step5">
                 <div class="step-content">
                     <div class="icon-animation">🏠</div>
@@ -169,7 +171,10 @@
                             <div class="lieu-description"><i class="fas fa-bed"></i> Dodo mérité<br><i class="fas fa-phone"></i> On s'appelle demain<br><i class="fas fa-heart"></i> Bonne nuit !</div>
                         </div>
                     </div>
-                    <button class="btn btn-next" id="btnNextLieu" disabled>Choisir la date <i class="fas fa-calendar"></i></button>
+                    <div class="step-navigation">
+                        <button class="btn btn-back" onclick="StepManager.showStep(4)"><i class="fas fa-arrow-left"></i> Retour</button>
+                        <button class="btn btn-next" id="btnNextLieu" disabled>Choisir la date <i class="fas fa-calendar"></i></button>
+                    </div>
                 </div>
             </div>
 
@@ -201,8 +206,10 @@
                             <i class="fas fa-check-circle"></i> Date sélectionnée : <span id="selectedDateText"></span>
                         </div>
                     </div>
-                                <button class="btn btn-back" onclick="StepManager.showStep(3)"><i class="fas fa-arrow-left"></i> Retour</button>
-                    <button class="btn btn-next" id="btnNextDate" disabled>Envoyer ma réponse <i class="fas fa-paper-plane"></i></button>
+                    <div class="step-navigation">
+                        <button class="btn btn-back" onclick="StepManager.showStep(5)"><i class="fas fa-arrow-left"></i> Retour</button>
+                        <button class="btn btn-next" id="btnNextDate" disabled>Envoyer ma réponse <i class="fas fa-paper-plane"></i></button>
+                    </div>
                 </div>
             </div>
 
