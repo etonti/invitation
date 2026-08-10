@@ -146,33 +146,36 @@
                 </div>
             </div>
 
-            <!-- Étape 5: Après le cinéma -->
-            <div class="step" id="step5">
-                <div class="step-content">
-                    <div class="icon-animation">🏠</div>
-                    <h1>Et après la séance ?</h1>
-                    <p class="question-subtitle">On fait quoi après le film ?</p>
-                    <div class="lieu-grid">
-                        <div class="lieu-card" data-lieu="chez-moi">
-                            <div class="lieu-icon">🏡</div>
-                            <div class="lieu-name">Chez moi</div>
-                            <div class="lieu-description"><i class="fas fa-tv"></i> Netflix & Chill<br><i class="fas fa-pizza-slice"></i> On commande à manger<br><i class="fas fa-gamepad"></i> Jeux vidéo</div>
-                        </div>
-                        <div class="lieu-card" data-lieu="chez-toi">
-                            <div class="lieu-icon">🏠</div>
-                            <div class="lieu-name">Chez toi</div>
-                            <div class="lieu-description"><i class="fas fa-music"></i> Ambiance musicale<br><i class="fas fa-couch"></i> Détente assurée<br><i class="fas fa-star"></i> Comme tu veux</div>
-                        </div>
-                        <div class="lieu-card" data-lieu="chacun">
-                            <div class="lieu-icon">👋</div>
-                            <div class="lieu-name">Chacun chez soi</div>
-                            <div class="lieu-description"><i class="fas fa-bed"></i> Dodo mérité<br><i class="fas fa-phone"></i> On s'appelle demain<br><i class="fas fa-heart"></i> Bonne nuit !</div>
-                        </div>
-                    </div>
-                                <button class="btn btn-back" onclick="StepManager.showStep(3)"><i class="fas fa-arrow-left"></i> Retour</button>
-                    <button class="btn btn-next" id="btnNextLieu" disabled>Choisir la date <i class="fas fa-calendar"></i></button>
-                </div>
+<!-- Étape 5: Après le cinéma -->
+<div class="step" id="step5">
+    <div class="step-content">
+        <div class="icon-animation">🏠</div>
+        <h1>Et après la séance ?</h1>
+        <p class="question-subtitle">On fait quoi après le film ?</p>
+        <div class="lieu-grid">
+            <div class="lieu-card" data-lieu="chez-moi">
+                <div class="lieu-icon">🏡</div>
+                <div class="lieu-name">Chez moi</div>
+                <div class="lieu-description"><i class="fas fa-tv"></i> Netflix & Chill<br><i class="fas fa-pizza-slice"></i> On commande à manger<br><i class="fas fa-gamepad"></i> Jeux vidéo</div>
             </div>
+            <div class="lieu-card" data-lieu="chez-toi">
+                <div class="lieu-icon">🏠</div>
+                <div class="lieu-name">Chez toi</div>
+                <div class="lieu-description"><i class="fas fa-music"></i> Ambiance musicale<br><i class="fas fa-couch"></i> Détente assurée<br><i class="fas fa-star"></i> Comme tu veux</div>
+            </div>
+            <div class="lieu-card" data-lieu="chacun">
+                <div class="lieu-icon">👋</div>
+                <div class="lieu-name">Chacun chez soi</div>
+                <div class="lieu-description"><i class="fas fa-bed"></i> Dodo mérité<br><i class="fas fa-phone"></i> On s'appelle demain<br><i class="fas fa-heart"></i> Bonne nuit !</div>
+            </div>
+        </div>
+        <!-- ⚠️ Ajoute cette div step-navigation -->
+        <div class="step-navigation">
+            <button class="btn btn-back" onclick="StepManager.showStep(4)"><i class="fas fa-arrow-left"></i> Retour</button>
+            <button class="btn btn-next" id="btnNextLieu" disabled>Choisir la date <i class="fas fa-calendar"></i></button>
+        </div>
+    </div>
+</div>
 
             <!-- Étape 6: Calendrier -->
             <div class="step" id="step6">
