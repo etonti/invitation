@@ -10,7 +10,6 @@ const allMovies = [
         rating: '★★★★★',
         poster: 'https://photos.infolocale.fr/infolocale/openagenda/2026/08/28/9606124/_1_cover_290-200_.jpg?rnd=20260804054214',
         description: 'Peter Parker face à un nouveau départ',
-        // Programme : { cinema: { date: [heures] } }
         schedule: {
             'pathe-orleans': {
                 '2026-08-11': ['16:45', '18:00', '18:30', '20:00', '21:30'],
@@ -69,7 +68,6 @@ const allMovies = [
                 '2026-08-13': ['22:00'],
                 '2026-08-14': ['22:00'],
                 '2026-08-15': ['22:00']
-                
             },
             'pathe-saran': {
                 '2026-08-11': ['22:00'],
@@ -86,6 +84,9 @@ const moviesDatabase = {
     'pathe-orleans': allMovies,
     'pathe-saran': allMovies
 };
+
+// Rendre allMovies accessible globalement pour l'email
+window.allMovies = allMovies;
 
 // ==========================================
 // GESTIONNAIRE DE FILMS
@@ -133,6 +134,7 @@ class MovieManager {
                 appState.invitation.movie = {
                     id: movie.id,
                     title: movie.title,
+                    poster: movie.poster,  // ← Ajouté pour l'email
                     cinema: cinema,
                     schedule: movie.schedule
                 };
