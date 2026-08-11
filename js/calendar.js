@@ -1,5 +1,5 @@
 // ==========================================
-// GESTIONNAIRE DE CALENDRIER - VERSION DEBUG
+// GESTIONNAIRE DE CALENDRIER - AVEC DISPONIBILITÉS
 // ==========================================
 class CalendarManager {
     constructor() {
@@ -7,6 +7,8 @@ class CalendarManager {
         this.selectedTime = null;
         this.currentMonth = new Date().getMonth();
         this.currentYear = new Date().getFullYear();
+        this.availableDates = [];
+        this.availableTimes = {};
         this.init();
         this.setupEventListeners();
     }
@@ -14,6 +16,66 @@ class CalendarManager {
     init() {
         this.renderCalendar();
         console.log('✅ Calendrier initialisé');
+    }
+
+    // Mettre à jour les disponibilités selon le film sélectionné
+    updateAvailability() {
+        const movie = appState.invitation.movie;
+        const cinema = appState.invitation.cinema;
+        
+        if (!movie || !cinema || !movie.schedule || !movie.schedule[cinema]) {
+            this.availableDates = [];
+            this.availableTimes = {};
+        } else {
+            this.availableDates = Object.keys(movie.schedule[cinema]);
+            this.availableTimes = movie.schedule[cinema];
+        }
+        
+        // Réinitialiser la sélection
+        this.selectedDate = null;
+        this.selectedTime = null;
+        appState.invitation.date = null;
+        appState.invitation.time = null;
+        
+        // Mettre à jour le sélecteur d'heure
+        this.updateTimePicker();
+        
+        // Réafficher le calendrier
+        this.renderCalendar();
+        
+        // Masquer l'affichage de la date
+        const displayContainer = document.getElementById('selectedDateDisplay');
+        if (displayContainer) displayContainer.style.display = 'none';
+        
+        this.checkCanProceed();
+        
+        console.log('📅 Disponibilités mises à jour:', this.availableDates.length, 'dates');
+    }
+
+    updateTimePicker() {
+        const timePicker = document.getElementById('timePicker');
+        if (!timePicker) return;
+        
+        // Vider
+        timePicker.innerHTML = '<option value="">Choisis une heure</option>';
+        
+        // Si pas de date sélectionnée, pas d'heures
+        if (!this.selectedDate) {
+            this.checkCanProceed();
+            return;
+        }
+        
+        const dateStr = this.formatDateISO(this.selectedDate);
+        const times = this.availableTimes[dateStr] || [];
+        
+        times.forEach(time => {
+            const option = document.createElement('option');
+            option.value = time;
+            option.textContent = time;
+            timePicker.appendChild(option);
+        });
+        
+        this.checkCanProceed();
     }
 
     renderCalendar() {
@@ -24,77 +86,69 @@ class CalendarManager {
             'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
             'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
         ];
-
         const daysOfWeek = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
         
-        // 1er jour du mois
-        const firstDay = new Date(this.currentYear, this.currentMonth, 1);
-        
-        // CORRECTION : getDay() retourne 0 pour Dimanche, 1 pour Lundi...
-        // Notre calendrier commence le Lundi (colonne 0)
-        // Si Dimanche (0) → colonne 6
-        // Si Lundi (1) → colonne 0
-        // Si Mardi (2) → colonne 1
-        // ...
-        // Si Samedi (6) → colonne 5
-        let startCol = firstDay.getDay() - 1;
-        if (startCol < 0) startCol = 6; // Dimanche
+        const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1);
+        let startCol = firstDayOfMonth.getDay() - 1;
+        if (startCol < 0) startCol = 6;
         
         const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-        
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        console.log('📅 MOIS:', months[this.currentMonth], this.currentYear);
-        console.log('   Premier jour:', firstDay.toLocaleDateString('fr-FR', {weekday: 'long'}));
-        console.log('   getDay():', firstDay.getDay(), '→ colonne:', startCol);
-        console.log('   Jours dans le mois:', daysInMonth);
+        // Vérifier si un film est sélectionné
+        const hasMovie = appState.invitation.movie && appState.invitation.movie.id;
+        const noMovieMessage = !hasMovie ? '<p style="text-align:center;color:#e74c3c;margin-bottom:15px;font-weight:600;">⚠️ Sélectionne d\'abord un film pour voir les disponibilités</p>' : '';
 
         let html = `
             <div class="custom-calendar">
                 <div class="calendar-navigation">
-                    <button class="nav-btn" id="prevMonth">
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
+                    <button class="nav-btn" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
                     <div class="month-year">
                         <span class="month">${months[this.currentMonth]}</span>
                         <span class="year">${this.currentYear}</span>
                     </div>
-                    <button class="nav-btn" id="nextMonth">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
+                    <button class="nav-btn" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
                 </div>
+                ${noMovieMessage}
                 <div class="calendar-grid">
                     <div class="days-header">
                         ${daysOfWeek.map(d => `<div class="day-name">${d}</div>`).join('')}
                     </div>
                     <div class="days-body">`;
 
-        // Cases vides
         for (let i = 0; i < startCol; i++) {
             html += '<div class="day empty"></div>';
         }
 
-        // Jours
         for (let d = 1; d <= daysInMonth; d++) {
             const date = new Date(this.currentYear, this.currentMonth, d);
             date.setHours(0, 0, 0, 0);
             
-            const dayOfWeek = date.getDay(); // 0=Dim, 1=Lun...
+            const dateStr = this.formatDateISO(date);
+            const dayOfWeek = date.getDay();
             const isToday = date.getTime() === today.getTime();
             const isPast = date < today;
             const isSelected = this.selectedDate && date.getTime() === this.selectedDate.getTime();
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+            
+            // Vérifier si le jour est disponible (a des séances)
+            const isAvailable = hasMovie && this.availableDates.includes(dateStr);
+            const isUnavailable = hasMovie && !isAvailable && !isPast;
             
             let cls = 'day';
             if (isToday) cls += ' today';
             if (isPast) cls += ' past';
             if (isSelected) cls += ' selected';
-            if (dayOfWeek === 0 || dayOfWeek === 6) cls += ' weekend';
+            if (isWeekend) cls += ' weekend';
+            if (isUnavailable) cls += ' unavailable';
+            if (isAvailable) cls += ' available';
             
             html += `
                 <div class="${cls}" data-date="${date.toISOString()}">
                     <span class="day-number">${d}</span>
                     ${isToday ? '<span class="today-badge">Auj.</span>' : ''}
+                    ${isAvailable ? '<span class="available-dot"></span>' : ''}
                 </div>`;
         }
 
@@ -108,8 +162,15 @@ class CalendarManager {
         this.addNavigationListeners();
     }
 
+    formatDateISO(date) {
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+
     addDayListeners() {
-        document.querySelectorAll('.day:not(.empty):not(.past)').forEach(day => {
+        document.querySelectorAll('.day:not(.empty):not(.past):not(.unavailable)').forEach(day => {
             const handler = (e) => {
                 e.preventDefault();
                 const date = new Date(day.dataset.date);
@@ -128,7 +189,6 @@ class CalendarManager {
             if (this.currentMonth < 0) { this.currentMonth = 11; this.currentYear--; }
             this.renderCalendar();
         });
-        
         document.getElementById('nextMonth')?.addEventListener('click', (e) => {
             e.preventDefault();
             this.currentMonth++;
@@ -140,13 +200,12 @@ class CalendarManager {
     selectDate(date) {
         this.selectedDate = date;
         appState.invitation.date = date;
+        this.selectedTime = null;
+        appState.invitation.time = null;
         
         document.querySelectorAll('.day.selected').forEach(el => el.classList.remove('selected'));
-        
         const el = document.querySelector(`.day[data-date="${date.toISOString()}"]`);
-        if (el) {
-            el.classList.add('selected');
-        }
+        if (el) el.classList.add('selected');
         
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         const formattedDate = date.toLocaleDateString('fr-FR', options);
@@ -154,13 +213,15 @@ class CalendarManager {
         const dt = document.getElementById('selectedDateText');
         const dc = document.getElementById('selectedDateDisplay');
         if (dt && dc) {
-            dt.textContent = this.selectedTime ? `${formattedDate} à ${this.selectedTime}` : `${formattedDate} (choisis l'heure ⏰)`;
+            dt.textContent = `${formattedDate} (choisis l'heure ⏰)`;
             dc.style.display = 'flex';
         }
         
-        this.checkCanProceed();
+        // Mettre à jour les heures disponibles
+        this.updateTimePicker();
+        
         if (navigator.vibrate) navigator.vibrate(20);
-        showToast('✨ Date sélectionnée !', 'success');
+        showToast('✨ Date sélectionnée ! Choisis l\'heure', 'success');
     }
 
     setupEventListeners() {
@@ -205,10 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function updateFinalMessage() {
     if (!calendarManager) return;
     
-   const cinemaNames = {
-    'pathe-orleans': 'Pathé Orléans 🏛️',
-    'pathe-saran': 'Pathé Saran 🏢'
-};
+    const cinemaNames = { 'pathe-orleans': 'Pathé Orléans 🏛️', 'pathe-saran': 'Pathé Saran 🏢' };
     const lieuNames = { 'chez-moi': 'Chez moi 🏡', 'chez-toi': 'Chez toi 🏠', 'chacun': 'Chacun chez soi 👋' };
     const foodEmojis = { 'popcorn': '🍿 Popcorn', 'nachos': '🧀 Nachos', 'bonbons': '🍬 Bonbons', 'chocolat': '🍫 Chocolat', 'boisson': '🥤 Boisson', 'glace': '🍦 Glace' };
     
