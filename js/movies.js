@@ -60,7 +60,7 @@ const allMovies = [
         genre: 'Thriller / Drame',
         duration: '2h00min',
         rating: '★★★★☆',
-        poster: 'https://all.web.img.acsta.net/img/6b/68/6b680ec933f51bfd826180635552e3c4.jpg',
+        poster: 'https://www.actusf.com/files/new_images/actualit%C3%A9s/Les%20images%20de%202026/Obsession2.jpg',
         description: 'Une obsession qui vire au cauchemar',
         schedule: {
             'pathe-orleans': {
@@ -69,6 +69,7 @@ const allMovies = [
                 '2026-08-13': ['22:00'],
                 '2026-08-14': ['22:00'],
                 '2026-08-15': ['22:00']
+                
             },
             'pathe-saran': {
                 '2026-08-11': ['22:00'],
