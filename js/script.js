@@ -122,6 +122,12 @@ class StepManager {
             appState.currentStep = stepNumber;
             this.updateProgressBar(stepNumber);
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Si on arrive à l'étape 6 (calendrier), mettre à jour les disponibilités
+            if (stepNumber === 6 && window.calendarManager) {
+                window.calendarManager.updateAvailability();
+                window.calendarManager.renderCalendar();
+            }
         }
     }
 
@@ -202,6 +208,10 @@ class SelectionManager {
             DOM.btnNextMovie.addEventListener('click', () => {
                 if (appState.invitation.movie) {
                     console.log('✅ Film sélectionné:', appState.invitation.movie.title);
+                    // Mettre à jour les disponibilités du calendrier
+                    if (window.calendarManager) {
+                        window.calendarManager.updateAvailability();
+                    }
                     StepManager.showStep(4);
                 }
             });
@@ -257,13 +267,13 @@ class SelectionManager {
         });
     }
 
-getCinemaName(cinema) {
-    const names = { 
-        'pathe-orleans': 'Pathé Orléans', 
-        'pathe-saran': 'Pathé Saran' 
-    };
-    return names[cinema] || cinema;
-}
+    getCinemaName(cinema) {
+        const names = { 
+            'pathe-orleans': 'Pathé Orléans', 
+            'pathe-saran': 'Pathé Saran' 
+        };
+        return names[cinema] || cinema;
+    }
 
     getLieuName(lieu) {
         const names = { 'chez-moi': 'Chez moi', 'chez-toi': 'Chez toi', 'chacun': 'Chacun chez soi' };
