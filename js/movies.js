@@ -1,5 +1,5 @@
 // ==========================================
-// BASE DE DONNÉES DES FILMS
+// BASE DE DONNÉES DES FILMS AVEC PROGRAMMES
 // ==========================================
 const allMovies = [
     {
@@ -9,7 +9,25 @@ const allMovies = [
         duration: '2h20min',
         rating: '★★★★★',
         poster: 'https://photos.infolocale.fr/infolocale/openagenda/2026/08/28/9606124/_1_cover_290-200_.jpg?rnd=20260804054214',
-        description: 'Peter Parker face à un nouveau départ'
+        description: 'Peter Parker face à un nouveau départ',
+        // Programme : { cinema: { date: [heures] } }
+        schedule: {
+            'pathe-orleans': {
+                '2026-08-11': ['16:45', '18:00', '18:30', '20:00', '21:30'],
+                '2026-08-12': ['16:45', '18:00', '18:30', '20:00', '21:30'],
+                '2026-08-13': ['16:45', '18:00', '18:30', '20:00', '21:30'],
+                '2026-08-14': ['16:45', '18:00', '18:30', '20:00', '21:30'],
+                '2026-08-15': ['16:45', '18:00', '18:30', '20:00', '21:30'],
+                '2026-08-16': ['16:00', '19:00']
+            },
+            'pathe-saran': {
+                '2026-08-11': ['19:00', '20:30', '22:00'],
+                '2026-08-12': ['19:00', '20:30', '22:00'],
+                '2026-08-13': ['19:00', '20:30', '22:00'],
+                '2026-08-14': ['19:00', '20:30', '22:00'],
+                '2026-08-15': ['19:00', '20:30', '22:00']
+            }
+        }
     },
     {
         id: 'odyssee',
@@ -18,38 +36,51 @@ const allMovies = [
         duration: '2h35min',
         rating: '★★★★☆',
         poster: 'https://images.ladepeche.fr/api/v1/images/view/6a607f77ec4760f16b073e20/large/image.jpg?v=3',
-        description: "L'épopée légendaire d'Ulysse"
+        description: "L'épopée légendaire d'Ulysse",
+        schedule: {
+            'pathe-orleans': {
+                '2026-08-11': ['17:20', '19:30', '20:00', '21:00'],
+                '2026-08-12': ['17:20', '19:30', '20:00', '21:00'],
+                '2026-08-13': ['17:20', '19:30', '20:00', '21:00'],
+                '2026-08-14': ['17:20', '19:30', '20:00', '21:00'],
+                '2026-08-15': ['17:20', '19:30', '20:00', '21:00']
+            },
+            'pathe-saran': {
+                '2026-08-11': ['17:45', '20:00', '21:00'],
+                '2026-08-12': ['17:45', '20:00', '21:00'],
+                '2026-08-13': ['17:45', '20:00', '21:00'],
+                '2026-08-14': ['17:45', '20:00', '21:00'],
+                '2026-08-15': ['17:45', '20:00', '21:00']
+            }
+        }
     },
     {
-        id: 'oakstreet',
-        title: "La Fin d'Oak Street",
+        id: 'obsession',
+        title: "L'Obsession",
         genre: 'Thriller / Drame',
-        duration: '1h55min',
+        duration: '2h00min',
         rating: '★★★★☆',
         poster: 'https://all.web.img.acsta.net/img/6b/68/6b680ec933f51bfd826180635552e3c4.jpg',
-        description: 'Un quartier qui bascule dans le chaos'
-    },
-    {
-        id: 'harrypotter',
-        title: 'Harry Potter : Le Retour',
-        genre: 'Fantastique / Aventure',
-        duration: '2h40min',
-        rating: '★★★★★',
-        poster: 'https://tse2.mm.bing.net/th/id/OIP.D2v43T3Girm5A322kg7tKAHaEd?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
-        description: 'La magie revient à Poudlard'
-    },
-    {
-        id: 'insidious',
-        title: "Insidious : L'Invasion du Lointain",
-        genre: 'Horreur / Thriller',
-        duration: '1h50min',
-        rating: '★★★★☆',
-        poster: 'https://tse2.mm.bing.net/th/id/OIP.B5g7Z729gJ4RLA30XjwSTwHaJQ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3',
-        description: "Une menace venue d'ailleurs"
+        description: 'Une obsession qui vire au cauchemar',
+        schedule: {
+            'pathe-orleans': {
+                '2026-08-11': ['22:00'],
+                '2026-08-12': ['22:00'],
+                '2026-08-13': ['22:00'],
+                '2026-08-14': ['22:00'],
+                '2026-08-15': ['22:00']
+            },
+            'pathe-saran': {
+                '2026-08-11': ['22:00'],
+                '2026-08-12': ['22:00'],
+                '2026-08-13': ['22:15'],
+                '2026-08-14': ['22:30'],
+                '2026-08-15': ['22:00']
+            }
+        }
     }
 ];
 
-// ⚠️ CORRECTION : Utilise les vrais noms des cinémas
 const moviesDatabase = {
     'pathe-orleans': allMovies,
     'pathe-saran': allMovies
@@ -73,20 +104,13 @@ class MovieManager {
         
         if (!moviesGrid) return;
         
-        const movies = moviesDatabase[cinema] || [];
+        const movies = moviesDatabase[cinema] || allMovies;
         
-        if (movies.length === 0) {
-            moviesGrid.innerHTML = '<p style="text-align:center;color:#636e72;padding:40px;">Aucun film disponible pour ce cinéma.</p>';
-            return;
-        }
-
         moviesGrid.innerHTML = movies.map(movie => `
             <div class="movie-card" data-movie-id="${movie.id}">
-                <div class="movie-poster" style="background: linear-gradient(135deg, #667eea, #764ba2);">
-                    <img src="${movie.poster}" 
-                         alt="${movie.title}"
-                         loading="lazy"
-                         onerror="this.style.display='none'; this.parentElement.innerHTML += '<div style=position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:20px;><div><div style=font-size:3em;>🎬</div><div style=font-size:1.1em;font-weight:700;>${movie.title}</div></div></div>';">
+                <div class="movie-poster">
+                    <img src="${movie.poster}" alt="${movie.title}" loading="lazy"
+                         onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(135deg,#667eea,#764ba2)';this.parentElement.innerHTML+='<div style=position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:white;><div style=font-size:2.5em;>🎬</div><div style=font-size:0.9em;font-weight:700;>${movie.title}</div></div>';">
                     <div class="movie-rating-badge">${movie.rating}</div>
                 </div>
                 <div class="movie-info">
@@ -97,36 +121,56 @@ class MovieManager {
             </div>
         `).join('');
 
-        const movieCards = document.querySelectorAll('.movie-card');
-        movieCards.forEach(card => {
+        const cards = moviesGrid.querySelectorAll('.movie-card');
+        cards.forEach(card => {
             card.addEventListener('click', () => {
-                movieCards.forEach(c => c.classList.remove('selected'));
+                cards.forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
                 this.selectedMovie = card.dataset.movieId;
                 
                 const movie = movies.find(m => m.id === this.selectedMovie);
-                
                 appState.invitation.movie = {
                     id: movie.id,
                     title: movie.title,
-                    cinema: cinema
+                    cinema: cinema,
+                    schedule: movie.schedule
                 };
                 
                 btnNext.disabled = false;
-                
                 if (navigator.vibrate) navigator.vibrate(20);
-                showToast(`"${movie.title}" sélectionné ! 🎥`, 'success');
-                
-                console.log('🎥 Film sélectionné:', movie.title);
+                showToast('"' + movie.title + '" sélectionné ! 🎥', 'success');
             });
         });
 
         btnNext.disabled = true;
+    }
+
+    getMovieSchedule(cinema, movieId) {
+        const movie = allMovies.find(m => m.id === movieId);
+        if (!movie || !movie.schedule || !movie.schedule[cinema]) return {};
+        return movie.schedule[cinema];
+    }
+
+    getAvailableDates(cinema, movieId) {
+        const schedule = this.getSchedule(cinema, movieId);
+        return Object.keys(schedule);
+    }
+
+    getAvailableTimes(cinema, movieId, dateStr) {
+        const schedule = this.getSchedule(cinema, movieId);
+        return schedule[dateStr] || [];
+    }
+
+    getSchedule(cinema, movieId) {
+        const movie = allMovies.find(m => m.id === movieId);
+        if (!movie || !movie.schedule) return {};
+        return movie.schedule[cinema] || {};
     }
 }
 
 let movieManager;
 document.addEventListener('DOMContentLoaded', () => {
     movieManager = new MovieManager();
-    console.log('🎥 MovieManager initialisé');
+    window.movieManager = movieManager;
+    console.log('🎥 MovieManager prêt avec 3 films');
 });
