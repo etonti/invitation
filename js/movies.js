@@ -8,7 +8,7 @@ const allMovies = [
         genre: 'Action / Super-héros',
         duration: '2h20min',
         rating: '★★★★★',
-        poster: 'https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGc@._V1_.jpg',
+        poster: 'https://photos.infolocale.fr/infolocale/openagenda/2026/08/28/9606124/_1_cover_290-200_.jpg?rnd=20260804054214',
         description: 'Peter Parker face à un nouveau départ',
         schedule: {
             'pathe-orleans': {
@@ -34,7 +34,7 @@ const allMovies = [
         genre: 'Aventure / Drame',
         duration: '2h35min',
         rating: '★★★★☆',
-        poster: 'https://m.media-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_.jpg',
+        poster: 'https://images.ladepeche.fr/api/v1/images/view/6a607f77ec4760f16b073e20/large/image.jpg?v=3',
         description: "L'épopée légendaire d'Ulysse",
         schedule: {
             'pathe-orleans': {
@@ -59,7 +59,7 @@ const allMovies = [
         genre: 'Thriller / Drame',
         duration: '2h00min',
         rating: '★★★★☆',
-        poster: 'https://m.media-amazon.com/images/M/MV5BYjhiNjBlODctY2ZiOC00YjVlLWFlNzAtNTVhNzM0YjI1NzMxXkEyXkFqcGc@._V1_.jpg',
+        poster: 'https://www.actusf.com/files/new_images/actualit%C3%A9s/Les%20images%20de%202026/Obsession2.jpg',
         description: 'Une obsession qui vire au cauchemar',
         schedule: {
             'pathe-orleans': {
@@ -134,7 +134,7 @@ class MovieManager {
                 appState.invitation.movie = {
                     id: movie.id,
                     title: movie.title,
-                    poster: movie.poster,
+                    poster: movie.poster,  // ← Ajouté pour l'email
                     cinema: cinema,
                     schedule: movie.schedule
                 };
