@@ -1894,5 +1894,39 @@ h1 {
     }
 }
 
+    /* Jours disponibles */
+.day.available {
+    border: 2px solid #48bb78;
+    background: #f0fff4;
+}
+
+.day.available:hover {
+    background: #c6f6d5;
+}
+
+.day.unavailable {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: #f5f5f5;
+    text-decoration: line-through;
+}
+
+.available-dot {
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #48bb78;
+}
+
+.day.selected {
+    border-color: #764ba2 !important;
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+    color: white !important;
+}
     
 }
