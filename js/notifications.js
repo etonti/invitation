@@ -1,4 +1,4 @@
-// notifications.js - Version complète avec EmailJS + Film
+// notifications.js - Version complète avec EmailJS + Affiche du film
 
 class NotificationManager {
     constructor() {
@@ -212,6 +212,7 @@ class NotificationManager {
     // Envoi de l'email de confirmation à la PERSONNE via EmailJS
     async sendEmailConfirmation(formData) {
         console.log('📧 Envoi email de confirmation à:', formData.email);
+        console.log('🖼️ Affiche du film:', formData.movie_poster);
         
         try {
             const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
@@ -225,6 +226,7 @@ class NotificationManager {
                         to_email: formData.email,
                         cinema: formData.cinema,
                         movie: formData.movie,
+                        movie_poster: formData.movie_poster,  // ← AJOUTÉ
                         nourriture: formData.nourriture,
                         lieu: formData.lieu,
                         date: formData.date
@@ -233,7 +235,7 @@ class NotificationManager {
             });
 
             if (response.ok) {
-                console.log('✅ Email de confirmation envoyé !');
+                console.log('✅ Email de confirmation envoyé avec affiche !');
             } else {
                 const errorData = await response.text();
                 console.error('❌ Erreur EmailJS:', errorData);
@@ -268,10 +270,10 @@ class NotificationManager {
     }
 
     prepareFormData() {
-       const cinemaNames = {
-    'pathe-orleans': 'Pathé Orléans 🏛️',
-    'pathe-saran': 'Pathé Saran 🏢'
-};
+        const cinemaNames = {
+            'pathe-orleans': 'Pathé Orléans 🏛️',
+            'pathe-saran': 'Pathé Saran 🏢'
+        };
         
         const lieuNames = {
             'chez-moi': 'Chez moi 🏡', 
@@ -285,10 +287,22 @@ class NotificationManager {
         }
 
         const movieTitle = window.appState?.invitation?.movie?.title || 'Non défini';
+        
+        // Récupérer l'affiche du film
+        let moviePoster = window.appState?.invitation?.movie?.poster || '';
+        
+        // Fallback : chercher dans allMovies si pas trouvé
+        if (!moviePoster && window.allMovies && window.appState?.invitation?.movie?.id) {
+            const found = window.allMovies.find(m => m.id === window.appState.invitation.movie.id);
+            if (found) moviePoster = found.poster;
+        }
+        
+        console.log('🖼️ Poster trouvé:', moviePoster);
 
         return {
             cinema: cinemaNames[window.appState?.invitation?.cinema] || 'Non défini',
             movie: movieTitle,
+            movie_poster: moviePoster,  // ← AJOUTÉ
             nourriture: window.appState?.invitation?.nourriture?.join(', ') || 'Non défini',
             lieu: lieuNames[window.appState?.invitation?.lieu] || 'Non défini',
             date: dateTime,
