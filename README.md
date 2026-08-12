@@ -289,8 +289,4 @@ javascript
 📄 Licence
 Projet libre d'utilisation pour usage personnel.
 
-👤 Contact
-Pour toute question ou modification, n'hésite pas à demander !
-
-Profite bien de ta soirée cinéma ! 🎬🍿💕
 
